@@ -1,0 +1,14 @@
+.header {
+    grid-area: h;
+    background-color: black;
+    }
+
+.header img {
+      width: 60px;
+    }
+
+.header h1{
+      color:white;
+      float: right;
+      text-align: center;
+    }
