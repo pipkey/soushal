@@ -1,8 +1,12 @@
 .nav {
+    padding: 10px;
     grid-area: n;
   background-color: #80AE4C;
   }
 
   .item {
       color: white;
+  }
+  .item.active {
+      color: indigo;
   }
