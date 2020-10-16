@@ -1,0 +1,8 @@
+.item{
+    color: gray;
+}
+.item img {
+    width: 12px;
+    height: 12px;
+    border-radius: 7px;
+  };
