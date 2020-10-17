@@ -10,10 +10,9 @@ const MyPosts = () => {
                 <textarea></textarea>
             </div>
             <div className={ss.posts}>
-            <Post />
-            <Post />
-            <Post />
-            <Post />
+            <Post message='Hi, how are you?'  likeCounts='7'/>
+            <Post message="It's my first Post" likeCounts='12'/>
+            
             </div>
         </div>
 
