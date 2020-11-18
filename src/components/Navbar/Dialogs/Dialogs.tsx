@@ -1,14 +1,14 @@
 import React from "react";
 import ss from "./Dialogs.module.css"
 import DialogItem from "./DialogItem/DialogItem";
-import Message, {MessagePropsType} from "./Messages/Message";
+import Message from "./Messages/Message";
 
 export type DialogPropsType = {
     name: string,
     id: number
 }
 
-type MessageDatePropsType ={
+export type MessageDatePropsType ={
     id:number,
     message: string
 }

@@ -16,7 +16,7 @@ const MyPosts = (props:MyPostsType ) => {
         <div className={ss.postsBlock}>
             <h3>My Posts </h3>
             <div>
-                <textarea></textarea>
+                <textarea>=</textarea>
             </div>
             <div>
                 <button>Add post</button>
