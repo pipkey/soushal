@@ -1,12 +1,13 @@
 .nav {
     padding: 10px;
     grid-area: n;
-  background-color: #80AE4C;
+  background-color: #A98307;
   }
 
-  .item {
+  .item a {
       color: white;
+      text-decoration: none;
   }
-  .item.active {
-      color: indigo;
+  .item a.active {
+      color: gold;
   }

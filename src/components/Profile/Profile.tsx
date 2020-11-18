@@ -1,19 +1,31 @@
-import React from 'react';
-import MyPosts from './MyPosts/MyPosts';
+import React from "react";
+import MyPosts from "./MyPosts/MyPosts";
 import ss from "./Profile.module.css"
+import ProfileInfo from "./ProfileInfo/ProfileInfo";
+
+export type PostDataType={
+    id: number,
+    message: string,
+    likeCounts: number
+}
 
 
-const Profile = () => {
+ type ProfilePropsType ={
+    postsDate: Array<PostDataType>
+}
+
+
+const Profile = (props: ProfilePropsType) => {
+
+
+
     return (
-        <div className={ss.content}>
-            <img  className={ss.main} src="https://i0.wp.com/www.courthousenews.com/wp-content/uploads/2017/09/White-tiger.jpg" />
+        <div>
+            <ProfileInfo/>
+            <MyPosts
+                postsDate={props.postsDate}
+            />
 
-            <div>
-                ava + disc
-            </div>
-     <div>
-         <MyPosts />
-     </div>
         </div>
 
     )

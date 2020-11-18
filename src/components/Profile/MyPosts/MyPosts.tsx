@@ -1,25 +1,35 @@
-import React from 'react';
+import React from "react";
 import ss from "./MyPosts.module.css"
-import Post from './Post/Post'
+import Post from "./Post/Post"
+import {PostDataType} from "../Profile";
 
 
-const MyPosts = () => {
+type MyPostsType={
+    postsDate: Array<PostDataType>
+}
+
+const MyPosts = (props:MyPostsType ) => {
+
+    let postElement = props.postsDate.map( p => <Post message={p.message} likeCounts={p.likeCounts}/>);
+
     return (
-        <div>
-            My Posts 
+        <div className={ss.postsBlock}>
+            <h3>My Posts </h3>
             <div>
                 <textarea></textarea>
             </div>
+            <div>
+                <button>Add post</button>
+            </div>
             <div className={ss.posts}>
-            <Post message = 'Hi, how are you?'  likeCounts={2}/>
-            <Post message = "It's my first Post" likeCounts={12}/>
-            
+                {postElement}
+
             </div>
         </div>
 
 
     )
-}
+};
 
 
 export default MyPosts;

@@ -1,0 +1,14 @@
+.content{
+  
+    grid-area: c;
+    background-color: grey;
+  }
+  .main {
+ 
+    width: 500px;
+    height: 300px;
+  }
+
+  .deskTopBlock{
+      padding: 15px;
+  }
