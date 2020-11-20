@@ -1,35 +1,26 @@
 import React from "react";
 import MyPosts from "./MyPosts/MyPosts";
-import ss from "./Profile.module.css"
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
+import {ProfilePageType} from "../../redux/state";
 
-export type PostDataType={
-    id: number,
-    message: string,
-    likeCounts: number
+
+export type ProfilePagePostType = {
+    profilePage: ProfilePageType
+
 }
 
 
- type ProfilePropsType ={
-    postsDate: Array<PostDataType>
-}
-
-
-const Profile = (props: ProfilePropsType) => {
-
-
-
+export const Profile = (props:ProfilePagePostType) => {
+debugger;
     return (
         <div>
             <ProfileInfo/>
             <MyPosts
-                postsDate={props.postsDate}
+                posts={props.profilePage.postsDate}
             />
 
         </div>
 
     )
-}
+};
 
-
-export default Profile;

@@ -2,52 +2,36 @@ import React from "react";
 import "./App.css";
 import Header from "./components/Heder/Header";
 import NavBar from "./components/Navbar/Navbar";
-import Profile, {PostDataType} from "./components/Profile/Profile";
-import Dialogs, {DialogPropsType, MessageDatePropsType} from "./components/Navbar/Dialogs/Dialogs";
 import {BrowserRouter, Route} from "react-router-dom";
 import Music from "./components/Navbar/Music/Music";
 import News from "./components/Navbar/News/News";
 import Settings from "./components/Navbar/Settings/Settings";
+import Dialogs from "./components/Navbar/Dialogs/Dialogs";
+import {Profile} from "./components/Profile/Profile";
+import {RootStateType} from "./redux/state";
 
-type AppPropsType={
-    dialogsDate:Array<DialogPropsType>
-    messageDate:Array<MessageDatePropsType>
-    postsDate:Array<PostDataType>
+
+type AppStateType = {
+    state: RootStateType
 }
 
-function App(props:AppPropsType) {
-
-    let DialogsRand =  () =>
-
-        <Dialogs
-        dialogsDate={props.dialogsDate}
-        messageDate={props.messageDate}
-        />;
-
-
-    let ProfileRand = () =>
-        <Profile
-            postsDate={props.postsDate}
-        />;
-
-
-
+function App(props: AppStateType) {
     return (
         <BrowserRouter>
-            <div className="app-wrapper">
-                <Header/>
-                <NavBar/>
-                <div className="app-wrapper-content">
-                    <Route path="/profile" render={ ProfileRand }/>
-                    <Route path="/dialogs" render={ DialogsRand }/>
-                    <Route path="/news" component={News}/>
-                    <Route path="/music" component={Music}/>
-                    <Route path="/settings" component={Settings}/>
+        <div className="app-wrapper">
+            <Header/>
+            <NavBar/>
+            <div className="app-wrapper-content">
+                <Route path={"/profile"} render={() => <Profile profilePage={props.state.profilePage}/>}/>
+                <Route path={"/dialogs"} render={() => <Dialogs messagePage={props.state.messagePage}/>}/>
+                <Route path={"/news"} component={News}/>
+                <Route path={"/music"} component={Music}/>
+                <Route path={"/settings"} component={Settings}/>
 
-                </div>
             </div>
+        </div>
         </BrowserRouter>
-    );
+            );
 }
 
 export default App;
