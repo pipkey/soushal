@@ -1,6 +1,9 @@
+
+
 export type RootStateType = {
     profilePage: ProfilePageType
     messagePage: MessagePageType
+    sidebar: SidebarType
 }
 
 export type ProfilePageType = {
@@ -20,6 +23,7 @@ export type MessageType = {
 export type DialogType = {
     id: number
     name: string
+    img: string
 }
 export type PostType = {
     id: number
@@ -27,6 +31,9 @@ export type PostType = {
     likeCounts: number
 }
 
+export type SidebarType = {
+
+}
 
 let state: RootStateType = {
     profilePage: {
@@ -43,11 +50,11 @@ let state: RootStateType = {
     messagePage: {
 
         dialogsDate: [
-            {id: 1, name: "Phil"},
-            {id: 2, name: "Sergo"},
-            {id: 3, name: "Pavel"},
-            {id: 4, name: "Denis"},
-            {id: 5, name: "Victor"},
+            {id: 1, name: "Phil", img:"https://lh3.googleusercontent.com/proxy/oMztHyk19V7h56bc8Vg0IP6gCK2-ACdJvZPUWgoeG59LO-bajikKgCDYMq_T22uqm7qgnqFwGp7lH-Ue9-epcGxi_C-XVQMj-rOKG0o7RMSeURcH5fVYr0X4S1A1OzEqbhMoISaCVsM"},
+            {id: 2, name: "Sergo", img:"https://instaved.ru/wp-content/uploads/2019/11/kartinki-na-instagram-na-avu_GLAV.jpg"},
+            {id: 3, name: "Pavel", img:"https://proprikol.ru/wp-content/uploads/2020/04/kartinki-dlya-vajbera-na-avu-3.jpg"},
+            {id: 4, name: "Denis", img:"https://klike.net/uploads/posts/2019-03/1551596697_5.jpg"},
+            {id: 5, name: "Victor", img:"https://klike.net/uploads/posts/2019-03/medium/1551512888_2.jpg"},
         ],
         messageDate: [
             {id: 1, message: "Hello"},
@@ -56,7 +63,23 @@ let state: RootStateType = {
             {id: 4, message: "beer?"},
             {id: 5, message: "we will go to cinema"}
         ]
+    },
+
+    sidebar: {
+
     }
+};
+
+
+export const addPost =(postMessage:string)=>{
+    debugger;
+    const newPost: PostType ={
+        id: 5,
+        message:postMessage,
+        likeCounts:0
+    };
+
+    state.profilePage.postsDate.push(newPost)
 };
 
 

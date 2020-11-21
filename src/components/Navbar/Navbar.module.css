@@ -11,3 +11,10 @@
   .item a.active {
       color: gold;
   }
+
+  .ava_friends img {
+      margin: 5px;
+      width: 40px;
+      height: 40px;
+      border-radius: 20px;
+  }

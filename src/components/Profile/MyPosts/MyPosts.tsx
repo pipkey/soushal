@@ -5,7 +5,10 @@ import {PostType} from "../../../redux/state"
 
 type MyPostsPropsType= {
     posts: Array<PostType>
+    addPost:(postMessage:string)=>void
 }
+
+
 const MyPosts = (props:MyPostsPropsType) => {
 
 
@@ -13,14 +16,25 @@ const MyPosts = (props:MyPostsPropsType) => {
         <Post key={post.id} message={post.message} likeCounts={post.likeCounts}
         />);
 
+    let newPostElement = React.createRef<HTMLTextAreaElement>();
+
+
+    const addPostHandler = ()=> {
+        debugger;
+        if (newPostElement.current) {
+        props.addPost(newPostElement.current.value)
+    }
+    };
+
+
     return (
         <div className={ss.postsBlock}>
             <h3>My Posts </h3>
             <div>
-                <textarea>=</textarea>
+                <textarea ref={newPostElement}></textarea>
             </div>
             <div>
-                <button>Add post</button>
+                <button onClick={addPostHandler}>Add post</button>
             </div>
             <div className={ss.posts}>
                 {postElement}
