@@ -15,6 +15,7 @@ import Friends from "./components/Navbar/Friends/Friends";
 type AppStateType = {
     state: RootStateType
     addPost: (newPost: string)=> void
+    ChangePostText:(newText:string)=> void
 }
 
 function App(props: AppStateType) {
@@ -31,7 +32,9 @@ function App(props: AppStateType) {
 
                 <Route path={"/profile"}
                        render={() => <Profile profilePage={props.state.profilePage}
-                                              addPost={props.addPost}/>}/>
+                                              addPost={props.addPost}
+                                              ChangePostText={props.ChangePostText}
+                       />}/>
 
                 <Route path={"/dialogs"}
                        render={() => <Dialogs sidebar={props.state.sidebar}
