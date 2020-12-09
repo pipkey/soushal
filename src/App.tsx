@@ -8,37 +8,34 @@ import News from "./components/Navbar/News/News";
 import Settings from "./components/Navbar/Settings/Settings";
 import Dialogs from "./components/Navbar/Dialogs/Dialogs";
 import {Profile} from "./components/Profile/Profile";
-import {RootStateType} from "./redux/state";
+import store, {StoreType} from "./redux/state";
 import Friends from "./components/Navbar/Friends/Friends";
 
 
 type AppStateType = {
-    state: RootStateType
-    addPost: (newPost: string)=> void
-    ChangePostText:(newText:string)=> void
+    store: StoreType
 }
 
-function App(props: AppStateType) {
-
+const App: React.FC<AppStateType> = (props) => {
 
 
     return (
 
         <div className="app-wrapper">
             <Header/>
-            <NavBar dialogsDate={props.state.messagePage.dialogsDate}/>
+            <NavBar dialogsDate={props.store.getState().messagePage.dialogsDate}/>
 
             <div className="app-wrapper-content">
 
                 <Route path={"/profile"}
-                       render={() => <Profile profilePage={props.state.profilePage}
-                                              addPost={props.addPost}
-                                              ChangePostText={props.ChangePostText}
-                       />}/>
+                       render={() => <Profile profilePage={props.store.getState().profilePage}
+                                              dispatch={props.store.dispatch.bind(store)}/>}/>
 
                 <Route path={"/dialogs"}
-                       render={() => <Dialogs sidebar={props.state.sidebar}
-                       messagePage={props.state.messagePage}/>}/>
+                       render={() => <Dialogs
+                           newMessage={props.store.getState().messagePage.newMessageText}
+                           dispatch={props.store.dispatch.bind(store)}
+                           messagePage={props.store.getState().messagePage}/>}/>
 
                 <Route path={"/news"} component={News}/>
                 <Route path={"/music"} component={Music}/>
@@ -47,7 +44,7 @@ function App(props: AppStateType) {
 
             </div>
         </div>
-            );
-}
+    );
+};
 
 export default App;
