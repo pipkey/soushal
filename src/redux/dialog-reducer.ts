@@ -1,22 +1,24 @@
-import {MessageType, PostType} from "./state";
+import {AllActionTypes, MessageType, RootStateType} from "./state";
 
 
 const ADD_NEW_MESSAGE = "ADD-NEW-MESSAGE";
 const CHANGE_NEW_MESSAGE = "CHANGE-NEW-MESSAGE";
 
 
-const dialogReducer = (state, action) => {
+const dialogReducer = (state:any, action:AllActionTypes) => {
      if (action.type === ADD_NEW_MESSAGE) {
         const newMessageDia: MessageType = {
             id: 7,
-            message: this._state.messagePage.newMessageText
+            message: state.newMessageText
         };
-        this._state.messagePage.messageDate.push(newMessageDia);
-        this._state.messagePage.newMessageText = "";
-        this._onChange()
+         state.messageDate.push(newMessageDia);
+         state.newMessageText = "";
+
     } else if (action.type === CHANGE_NEW_MESSAGE) {
-        this._state.messagePage.newMessageText = action.newMessage;
-        this._onChange()
+         state.messagePage.newMessageText = action.newMessage;
+
     }
     return state
 };
+
+export default dialogReducer;

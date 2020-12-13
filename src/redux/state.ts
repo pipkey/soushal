@@ -1,3 +1,14 @@
+import profileReducer from "./profile-reducer";
+import dialogReducer from "./dialog-reducer";
+
+const imgObj = {
+    img1: "https://www.meme-arsenal.com/memes/8c4efb9bdbe32514cd7b64ec5e2e1fd1.jpg",
+    img2: "https://instaved.ru/wp-content/uploads/2019/11/kartinki-na-instagram-na-avu_GLAV.jpg",
+    img3: "https://proprikol.ru/wp-content/uploads/2020/04/kartinki-dlya-vajbera-na-avu-3.jpg",
+    img4: "https://klike.net/uploads/posts/2019-03/1551596697_5.jpg",
+    img5: "https://klike.net/uploads/posts/2019-03/medium/1551512888_2.jpg"
+};
+
 export type RootStateType = {
     profilePage: ProfilePageType
     messagePage: MessagePageType
@@ -27,6 +38,7 @@ export type PostType = {
     likeCounts: number
 }
 export type SidebarType = {}
+
 export type StoreType = {
     _state: RootStateType
     _onChange: () => void
@@ -35,7 +47,11 @@ export type StoreType = {
     dispatch: (action: AllActionTypes) => void
 }
 //Types of action
-export type AllActionTypes = ReturnType<typeof addPostAC> | ReturnType<typeof ChangePostAC> | ReturnType<typeof NewMessageAC> | ReturnType<typeof ChangeMessageAC>
+export type AllActionTypes =
+    ReturnType<typeof addPostAC> |
+    ReturnType<typeof ChangePostAC> |
+    ReturnType<typeof NewMessageAC> |
+    ReturnType<typeof ChangeMessageAC>
 
 // Action Creators
 export const addPostAC = () => ({type: ADD_POST} as const);
@@ -70,19 +86,21 @@ const store: StoreType = {
         messagePage: {
 
             dialogsDate: [
-                {id: 1, name: "Phil", img: "https://www.meme-arsenal.com/memes/8c4efb9bdbe32514cd7b64ec5e2e1fd1.jpg"},
+                {id: 1, name: "Phil", img: imgObj.img1},
                 {
                     id: 2,
                     name: "Sergo",
-                    img: "https://instaved.ru/wp-content/uploads/2019/11/kartinki-na-instagram-na-avu_GLAV.jpg"
+                    img: imgObj.img2
                 },
                 {
                     id: 3,
                     name: "Pavel",
-                    img: "https://proprikol.ru/wp-content/uploads/2020/04/kartinki-dlya-vajbera-na-avu-3.jpg"
+                    img: imgObj.img3
                 },
-                {id: 4, name: "Denis", img: "https://klike.net/uploads/posts/2019-03/1551596697_5.jpg"},
-                {id: 5, name: "Victor", img: "https://klike.net/uploads/posts/2019-03/medium/1551512888_2.jpg"},
+                {
+                    id: 4, name: "Denis", img: imgObj.img4
+                },
+                {id: 5, name: "Victor", img: imgObj.img5},
             ],
             messageDate: [
                 {id: 1, message: "Hello"},
@@ -98,6 +116,7 @@ const store: StoreType = {
         sidebar: {}
     },
 
+
     getState() {
         return this._state;
     },
@@ -111,30 +130,13 @@ const store: StoreType = {
     },
 
     dispatch(action) {
-        if (action.type === ADD_POST) {
-            const newPost: PostType = {
-                id: 5,
-                message: this._state.profilePage.newPostText,
-                likeCounts: 0
-            };
-            this._state.profilePage.postsDate.push(newPost);
-            this._state.profilePage.newPostText = "";
-            this._onChange()
-        } else if (action.type === CHANGE_POST_TEXT) {
-            this._state.profilePage.newPostText = action.newText;
-            this._onChange()
-        } else if (action.type === ADD_NEW_MESSAGE) {
-            const newMessageDia: MessageType = {
-                id: 7,
-                message: this._state.messagePage.newMessageText
-            };
-            this._state.messagePage.messageDate.push(newMessageDia);
-            this._state.messagePage.newMessageText = "";
-            this._onChange()
-        } else if (action.type === CHANGE_NEW_MESSAGE) {
-            this._state.messagePage.newMessageText = action.newMessage;
-            this._onChange()
-        }
+
+
+        this._state.profilePage = profileReducer(this._state, action);
+        this._state.messagePage= dialogReducer(this._state, action);
+        this._state.sidebar = profileReducer(this._state, action);
+
+        this._onChange();
 
     }
 };
