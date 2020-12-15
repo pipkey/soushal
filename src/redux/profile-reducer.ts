@@ -1,21 +1,21 @@
-import {PostType, RootStateType, AllActionTypes} from "./state";
+import {AllActionTypes, PostType, ProfilePageType} from "./state";
 
 
 const ADD_POST = "ADD-POST";
 const CHANGE_POST_TEXT = "CHANGE-POST-TEXT";
 
 
-const profileReducer = (state:any, action:AllActionTypes) => {
+const profileReducer = (state:ProfilePageType, action:AllActionTypes) => {
     if (action.type === ADD_POST) {
         const newPost: PostType = {
             id: 5,
-            message: state.profilePage.newPostText,
+            message: state.newPostText,
             likeCounts: 0
         };
-        state.profilePage.postsDate.push(newPost);
-        state.profilePage.newPostText = "";
+        state.postsDate.push(newPost);
+        state.newPostText = "";
     } else if (action.type === CHANGE_POST_TEXT) {
-        state.profilePage.newPostText = action.newText;
+        state.newPostText = action.newText;
     } else
         return state
 };

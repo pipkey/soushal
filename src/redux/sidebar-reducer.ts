@@ -1,5 +1,7 @@
-const sidebarReducer =()=> {
-    return
+import {AllActionTypes, SidebarType} from "./state";
+
+const sidebarReducer =(state: SidebarType, action:AllActionTypes)=> {
+    return state
 };
 
 

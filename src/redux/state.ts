@@ -1,5 +1,6 @@
 import profileReducer from "./profile-reducer";
 import dialogReducer from "./dialog-reducer";
+import sidebarReducer from "./sidebar-reducer";
 
 const imgObj = {
     img1: "https://www.meme-arsenal.com/memes/8c4efb9bdbe32514cd7b64ec5e2e1fd1.jpg",
@@ -8,7 +9,6 @@ const imgObj = {
     img4: "https://klike.net/uploads/posts/2019-03/1551596697_5.jpg",
     img5: "https://klike.net/uploads/posts/2019-03/medium/1551512888_2.jpg"
 };
-
 export type RootStateType = {
     profilePage: ProfilePageType
     messagePage: MessagePageType
@@ -38,7 +38,6 @@ export type PostType = {
     likeCounts: number
 }
 export type SidebarType = {}
-
 export type StoreType = {
     _state: RootStateType
     _onChange: () => void
@@ -46,6 +45,13 @@ export type StoreType = {
     getState: () => RootStateType
     dispatch: (action: AllActionTypes) => void
 }
+
+// AC type bind
+const ADD_POST = "ADD-POST";
+const CHANGE_POST_TEXT = "CHANGE-POST-TEXT";
+const ADD_NEW_MESSAGE = "ADD-NEW-MESSAGE";
+const CHANGE_NEW_MESSAGE = "CHANGE-NEW-MESSAGE";
+
 //Types of action
 export type AllActionTypes =
     ReturnType<typeof addPostAC> |
@@ -59,12 +65,6 @@ export const ChangePostAC = (newText: string) => ({type: CHANGE_POST_TEXT, newTe
 export const NewMessageAC = () => ({type: ADD_NEW_MESSAGE} as const);
 export const ChangeMessageAC = (newMessage: string) => (
     {type: CHANGE_NEW_MESSAGE, newMessage: newMessage} as const);
-
-// AC type bind
-const ADD_POST = "ADD-POST";
-const CHANGE_POST_TEXT = "CHANGE-POST-TEXT";
-const ADD_NEW_MESSAGE = "ADD-NEW-MESSAGE";
-const CHANGE_NEW_MESSAGE = "CHANGE-NEW-MESSAGE";
 
 
 //STORE
@@ -116,7 +116,6 @@ const store: StoreType = {
         sidebar: {}
     },
 
-
     getState() {
         return this._state;
     },
@@ -131,13 +130,11 @@ const store: StoreType = {
 
     dispatch(action) {
 
-
-        this._state.profilePage = profileReducer(this._state, action);
-        this._state.messagePage= dialogReducer(this._state, action);
-        this._state.sidebar = profileReducer(this._state, action);
+        profileReducer(this._state.profilePage, action);
+        dialogReducer(this._state.messagePage, action);
+        sidebarReducer(this._state.sidebar, action);
 
         this._onChange();
-
     }
 };
 
