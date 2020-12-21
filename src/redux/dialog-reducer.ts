@@ -1,4 +1,4 @@
-import {AllActionTypes, imgObj, MessagePageType, MessageType} from "./store";
+import {AllActionTypes, imgObj, MessagePageType} from "./store";
 
 
 const ADD_NEW_MESSAGE = "ADD-NEW-MESSAGE";
@@ -37,23 +37,22 @@ let initialState: MessagePageType = {
 
 
 const dialogReducer = (state: MessagePageType = initialState, action: AllActionTypes) => {
-    if (action.type === ADD_NEW_MESSAGE) {
-        const newMessageDia: MessageType = {
-            id: 7,
-            message: state.newMessageText
-        };
-        let stateCopy = {...state};
-        stateCopy.messageDate= [...state.messageDate];
-        stateCopy.messageDate.push(newMessageDia);
-        stateCopy.newMessageText = "";
-        return  stateCopy
 
-    } else if (action.type === CHANGE_NEW_MESSAGE) {
-        let stateCopy = {...state};
-        stateCopy.newMessageText = action.newMessage;
-        return stateCopy
+    switch (action.type) {
+        case ADD_NEW_MESSAGE:
+            return {
+                ...state,
+                newMessageText: "",
+                messageDate: [...state.messageDate,
+                    {id: 7, message: state.newMessageText}
+                ]
+            };
+        case CHANGE_NEW_MESSAGE:
+            return {
+                ...state,
+                newMessageText: action.newMessage
+            };
     }
-
     return state
 };
 

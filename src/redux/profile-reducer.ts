@@ -1,4 +1,4 @@
-import {AllActionTypes, PostType, ProfilePageType} from "./store";
+import {AllActionTypes, ProfilePageType} from "./store";
 
 
 const ADD_POST = "ADD-POST";
@@ -21,23 +21,21 @@ let InitialState: ProfilePageType = {
 
 const profileReducer = (state: ProfilePageType = InitialState, action: AllActionTypes) => {
 
-    if (action.type === ADD_POST) {
-        const newPost: PostType = {
-            id: 5,
-            message: state.newPostText,
-            likeCounts: 0
-        };
-        let stateCopy = {...state};
-        stateCopy.postsDate = [...state.postsDate];
-        stateCopy.postsDate.push(newPost);
-        stateCopy.newPostText = "";
-        return stateCopy
-    } else if (action.type === CHANGE_POST_TEXT) {
-       let stateCopy = {...state};
-        stateCopy.newPostText = action.newText;
-        return stateCopy
-    } else
-        return state
+    switch (action.type) {
+        case ADD_POST:
+            return {
+                ...state,
+                newPostText: "",
+                postsDate: [...state.postsDate, {id: 5, message: state.newPostText, likeCounts: 0}]
+            };
+        case CHANGE_POST_TEXT:
+            return {
+                ...state,
+                newPostText: action.newText
+            };
+        default:
+            return state
+    }
 };
 
 export default profileReducer;
