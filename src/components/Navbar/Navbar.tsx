@@ -1,14 +1,12 @@
 import React from "react";
 import ss from "./Navbar.module.css"
 import {NavLink} from "react-router-dom";
-import {DialogType} from "../../redux/state";
+import {DialogType} from "../../redux/store";
 
 
-type NavbarPropsType = {
-    dialogsDate: Array<DialogType>
-}
 
-const NavBar = (props: NavbarPropsType) => {
+
+const NavBar = () => {
 
     return (
         <nav className={ss.nav}>
@@ -28,11 +26,7 @@ const NavBar = (props: NavbarPropsType) => {
                 <NavLink to="/settings" activeClassName={ss.active}>Settings</NavLink>
             </div>
             <div className={ss.item}>
-                <NavLink to="/friends" activeClassName={ss.active}>Friends
-                    <div className={ss.ava_friends}>
-                        {props.dialogsDate.map(im => <img src={im.img}/>)}
-                    </div>
-                </NavLink>
+                <NavLink to="/friends" activeClassName={ss.active}>Friends</NavLink>
             </div>
 
         </nav>

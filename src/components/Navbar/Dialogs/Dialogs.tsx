@@ -2,13 +2,14 @@ import React, {ChangeEvent} from "react";
 import ss from "./Dialogs.module.css"
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Messages/Message";
-import {AllActionTypes, ChangeMessageAC, MessagePageType, NewMessageAC, SidebarType} from "../../../redux/state";
+import {MessagePageType} from "../../../redux/store";
 
 
 type MessagePropsType = {
     messagePage: MessagePageType
-    dispatch: (action: AllActionTypes) => void
     newMessage:string
+    addMessage:()=>void
+    onChangeMessage:(value:string)=>void
 }
 
 
@@ -22,14 +23,11 @@ const Dialogs = (props: MessagePropsType) => {
 
 
     const addMessage = () => {
-        props.dispatch(NewMessageAC())
+        props.addMessage()
     };
-
     const onChangeMessage = (e: ChangeEvent<HTMLTextAreaElement>) => {
         let newMessage = e.currentTarget.value;
-        props.dispatch(ChangeMessageAC(newMessage))
-
-
+       props.onChangeMessage(newMessage)
     };
 
 
