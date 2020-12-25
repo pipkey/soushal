@@ -1,5 +1,4 @@
-import {AllActionTypes, FOLLOW, UNFOLLOW, SET_USERS, imgObj} from "./store";
-
+import {AllActionTypes, FOLLOW, SET_USERS, UNFOLLOW} from "./store";
 
 
 export type InitialType = {
@@ -7,16 +6,20 @@ export type InitialType = {
 }
  export type UsersType = {
     id: number
-     photoURL:string
-    fullName: string
+     photos:photosType
+    name: string
     followed:boolean
     status: string
-    location: LocationType
+    // location: LocationType
 }
-type LocationType = {
-    city: string
-    country: string
+type photosType={
+    small: string
+    large?: string
 }
+// type LocationType = {
+//     city: string
+//     country: string
+// }
 
 let InitialState:InitialType = {
     users: []
