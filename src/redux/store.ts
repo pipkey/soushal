@@ -1,6 +1,7 @@
 import profileReducer from "./profile-reducer";
 import dialogReducer from "./dialog-reducer";
 import sidebarReducer from "./sidebar-reducer";
+import {InitialType, UsersType} from "./users-reducer";
 
 export const imgObj = {
     img1: "https://www.meme-arsenal.com/memes/8c4efb9bdbe32514cd7b64ec5e2e1fd1.jpg",
@@ -13,6 +14,7 @@ export type RootStateType = {
     profilePage: ProfilePageType
     messagePage: MessagePageType
     sidebar: SidebarType
+    usersPage: InitialType
 }
 export type ProfilePageType = {
     postsDate: Array<PostType>
@@ -48,17 +50,23 @@ export type StoreType = {
 }
 
 // AC type bind
-const ADD_POST = "ADD-POST";
-const CHANGE_POST_TEXT = "CHANGE-POST-TEXT";
-const ADD_NEW_MESSAGE = "ADD-NEW-MESSAGE";
-const CHANGE_NEW_MESSAGE = "CHANGE-NEW-MESSAGE";
+export const ADD_POST = "ADD-POST";
+export const CHANGE_POST_TEXT = "CHANGE-POST-TEXT";
+export const ADD_NEW_MESSAGE = "ADD-NEW-MESSAGE";
+export const CHANGE_NEW_MESSAGE = "CHANGE-NEW-MESSAGE";
+export const FOLLOW = "FOLLOW";
+export const UNFOLLOW = "UNFOLLOW";
+export const SET_USERS= "SET_USERS";
 
 //Types of action
 export type AllActionTypes =
     ReturnType<typeof addPostAC> |
     ReturnType<typeof ChangePostAC> |
     ReturnType<typeof NewMessageAC> |
-    ReturnType<typeof ChangeMessageAC>
+    ReturnType<typeof ChangeMessageAC> |
+    ReturnType<typeof unFollowAC>|
+    ReturnType<typeof followAC >|
+    ReturnType<typeof setUsersAC >
 
 // Action Creators
 export const addPostAC = () => ({type: ADD_POST} as const);
@@ -66,6 +74,9 @@ export const ChangePostAC = (newText: string) => ({type: CHANGE_POST_TEXT, newTe
 export const NewMessageAC = () => ({type: ADD_NEW_MESSAGE} as const);
 export const ChangeMessageAC = (newMessage: string) => (
     {type: CHANGE_NEW_MESSAGE, newMessage: newMessage} as const);
+export const followAC = (userId: number) => ({type: FOLLOW, userId} as const);
+export const unFollowAC = (userId: number) => ({type: UNFOLLOW, userId} as const);
+export const setUsersAC = (users: Array<UsersType>) => ({type: SET_USERS, users} as const);
 
 
 // STORE

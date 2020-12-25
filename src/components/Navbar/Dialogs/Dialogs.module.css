@@ -1,4 +1,5 @@
 .dialogs {
+    font-family: "Kaushan Script",serif;
     display: grid;
     grid-template-columns: 2fr 10fr;
 }

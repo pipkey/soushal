@@ -2,35 +2,17 @@ import {combineReducers, createStore} from "redux";
 import profileReducer from "./profile-reducer";
 import dialogReducer from "./dialog-reducer";
 import sidebarReducer from "./sidebar-reducer";
-import {
-    addPostAC,
-    ChangeMessageAC,
-    ChangePostAC,
-    MessagePageType,
-    NewMessageAC,
-    ProfilePageType,
-    SidebarType
-} from "./store";
+import {AllActionTypes} from "./store";
+import usersReducer from "./users-reducer";
 
 
-export type RootStore = {
-    profilePage: ProfilePageType
-    messagePage: MessagePageType
-    sidebar: SidebarType
-}
-
-export type actionType =
-    ReturnType<typeof addPostAC> |
-    ReturnType<typeof ChangePostAC> |
-    ReturnType<typeof NewMessageAC> |
-    ReturnType<typeof ChangeMessageAC>
-
-export type dispatchType = (action: actionType) => void
+export type dispatchType = (action: AllActionTypes) => void
 
 let reducers = combineReducers({
     profilePage: profileReducer,
     messagePage: dialogReducer,
     sidebar: sidebarReducer,
+    usersPage: usersReducer
 });
 
 

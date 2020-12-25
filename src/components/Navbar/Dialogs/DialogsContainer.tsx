@@ -1,7 +1,7 @@
 import React from "react";
-import {ChangeMessageAC, NewMessageAC, RootStateType, MessagePageType} from "../../../redux/store";
+import {ChangeMessageAC, MessagePageType, NewMessageAC, RootStateType} from "../../../redux/store";
 import Dialogs from "./Dialogs";
-import StoreContext, {connect} from "react-redux";
+import {connect} from "react-redux";
 import {dispatchType} from "../../../redux/redux-store";
 
 //Types container

@@ -1,8 +1,4 @@
-import {AllActionTypes, ProfilePageType} from "./store";
-
-
-const ADD_POST = "ADD-POST";
-const CHANGE_POST_TEXT = "CHANGE-POST-TEXT";
+import {ADD_POST, AllActionTypes, ProfilePageType, CHANGE_POST_TEXT} from "./store";
 
 
 let InitialState: ProfilePageType = {
@@ -37,5 +33,7 @@ const profileReducer = (state: ProfilePageType = InitialState, action: AllAction
             return state
     }
 };
+
+
 
 export default profileReducer;

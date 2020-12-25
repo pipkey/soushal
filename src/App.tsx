@@ -9,12 +9,10 @@ import Settings from "./components/Navbar/Settings/Settings";
 import {Profile} from "./components/Profile/Profile";
 import Friends from "./components/Navbar/Friends/Friends";
 import DialogsContainer from "./components/Navbar/Dialogs/DialogsContainer";
+import UsersContainer from "./components/Users/UsersContainer";
 
 
 const App: React.FC = () => {
-    debugger
-
-
     return (
 
         <div className="app-wrapper">
@@ -27,6 +25,9 @@ const App: React.FC = () => {
 
                 <Route path={"/dialogs"}
                        render={() => <DialogsContainer/>}/>
+
+                <Route path={"/users"}
+                       render={() => <UsersContainer/> }/>
 
                 <Route path={"/news"} component={News}/>
                 <Route path={"/music"} component={Music}/>

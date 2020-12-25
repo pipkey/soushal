@@ -1,4 +1,5 @@
 .header {
+    font-family: "Kaushan Script",serif;
     grid-area: h;
     background-color: black;
     }
@@ -8,6 +9,7 @@
     }
 
 .header h1{
+    margin-right: 10px;
       color:white;
       float: right;
       text-align: center;

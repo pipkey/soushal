@@ -1,8 +1,4 @@
-import {AllActionTypes, imgObj, MessagePageType} from "./store";
-
-
-const ADD_NEW_MESSAGE = "ADD-NEW-MESSAGE";
-const CHANGE_NEW_MESSAGE = "CHANGE-NEW-MESSAGE";
+import {AllActionTypes, imgObj, MessagePageType, ADD_NEW_MESSAGE, CHANGE_NEW_MESSAGE} from "./store";
 
 
 let initialState: MessagePageType = {
@@ -55,5 +51,7 @@ const dialogReducer = (state: MessagePageType = initialState, action: AllActionT
     }
     return state
 };
+
+
 
 export default dialogReducer;

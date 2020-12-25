@@ -1,15 +1,21 @@
 .nav {
+    font-family: "Kaushan Script", serif;
+    font-size: large;
     padding: 10px;
     grid-area: n;
   background-color: #A98307;
   }
+.nav hr{
+    width: 70px;
+    margin-left: 0 ;
+}
 
   .item a {
       color: white;
       text-decoration: none;
   }
   .item a.active {
-      color: gold;
+      color: black;
   }
 
   .ava_friends img {
