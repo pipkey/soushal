@@ -1,5 +1,4 @@
 import React from "react";
-import Users from "./Users";
 import {connect} from "react-redux";
 import {dispatchType} from "../../redux/redux-store";
 import {
@@ -11,7 +10,21 @@ import {
     unFollowAC
 } from "../../redux/store";
 import {UsersType} from "../../redux/users-reducer";
+import axios from "axios";
+import Users from "./Users";
 
+//types
+export type UsersPropsType = {
+    users: Array<UsersType>
+    pageSize: number
+    totalUsersCount: number
+    follow: (usersId: number) => void
+    unFollow: (usersId: number) => void
+    setUsers: (users: Array<UsersType>) => void
+    setCurrentPage: (num: number) => void
+    setTotalUsersCount: (totalCount: number) => void
+    currentPage: number
+}
 type MapStatPropsType = {
     users: Array<UsersType>
     pageSize: number
@@ -25,7 +38,39 @@ type MapDispPropsType = {
     setCurrentPage: (num: number) => void
     setTotalUsersCount: (totalCount: number) => void
 };
+//end types
 
+class UsersContainer extends React.Component<UsersPropsType> {
+
+    componentDidMount(): void {
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
+            .then(response => {
+                this.props.setUsers(response.data.items);
+                this.props.setTotalUsersCount(response.data.totalCount)
+            })
+    }
+
+    onPageChanger = (pageNumber: number) => {
+        this.props.setCurrentPage(pageNumber);
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`)
+            .then(response => {
+                this.props.setUsers(response.data.items)
+            })
+    };
+
+    render() {
+        return <Users
+            onPageChanger={this.onPageChanger}
+            totalUsersCount={this.props.totalUsersCount}
+            pageSize={this.props.pageSize}
+            follow={this.props.follow}
+            unFollow={this.props.unFollow}
+            users={this.props.users}
+            currentPage={this.props.currentPage}
+        />
+
+    }
+}
 
 const mapStateToProps = (state: RootStateType): MapStatPropsType => {
     return {
@@ -45,6 +90,5 @@ const mapDispatchToProps = (dispatch: dispatchType): MapDispPropsType => {
     }
 };
 
-const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(Users);
+export default  connect(mapStateToProps, mapDispatchToProps)(UsersContainer);
 
-export default UsersContainer;
