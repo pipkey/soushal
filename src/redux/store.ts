@@ -1,6 +1,3 @@
-import profileReducer from "./profile-reducer";
-import dialogReducer from "./dialog-reducer";
-import sidebarReducer from "./sidebar-reducer";
 import {InitialType, UsersType} from "./users-reducer";
 
 export const imgObj = {
@@ -40,7 +37,6 @@ export type PostType = {
     likeCounts: number
 }
 export type SidebarType = {}
-
 export type StoreType = {
     _state: RootStateType
     _onChange: () => void
@@ -56,7 +52,9 @@ export const ADD_NEW_MESSAGE = "ADD-NEW-MESSAGE";
 export const CHANGE_NEW_MESSAGE = "CHANGE-NEW-MESSAGE";
 export const FOLLOW = "FOLLOW";
 export const UNFOLLOW = "UNFOLLOW";
-export const SET_USERS= "SET_USERS";
+export const SET_USERS = "SET_USERS";
+export const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
+export const SET_USER_TOTAL_COUNT = "SET_USER_TOTAL_COUNT";
 
 //Types of action
 export type AllActionTypes =
@@ -64,9 +62,12 @@ export type AllActionTypes =
     ReturnType<typeof ChangePostAC> |
     ReturnType<typeof NewMessageAC> |
     ReturnType<typeof ChangeMessageAC> |
-    ReturnType<typeof unFollowAC>|
-    ReturnType<typeof followAC >|
-    ReturnType<typeof setUsersAC >
+    ReturnType<typeof unFollowAC> |
+    ReturnType<typeof followAC> |
+    ReturnType<typeof setUsersAC> |
+    ReturnType<typeof setCurrentPageAC>|
+    ReturnType<typeof setUserTotalCountAC>
+
 
 // Action Creators
 export const addPostAC = () => ({type: ADD_POST} as const);
@@ -77,6 +78,8 @@ export const ChangeMessageAC = (newMessage: string) => (
 export const followAC = (userId: number) => ({type: FOLLOW, userId} as const);
 export const unFollowAC = (userId: number) => ({type: UNFOLLOW, userId} as const);
 export const setUsersAC = (users: Array<UsersType>) => ({type: SET_USERS, users} as const);
+export const setCurrentPageAC = (currentPage:number) => ({type: SET_CURRENT_PAGE, currentPage} as const);
+export const setUserTotalCountAC = (totalCount:number) => ({type: SET_USER_TOTAL_COUNT, totalCount} as const);
 
 
 // STORE
