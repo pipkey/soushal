@@ -8,8 +8,8 @@ import {MessagePageType} from "../../../redux/store";
 type MessagePropsType = {
     messagePage: MessagePageType
     newMessage:string
-    addMessage:()=>void
-    onChangeMessage:(value:string)=>void
+    NewMessage:()=>void
+    ChangeMessage:(value:string)=>void
 }
 
 
@@ -23,11 +23,11 @@ const Dialogs = (props: MessagePropsType) => {
 
 
     const addMessage = () => {
-        props.addMessage()
+        props.NewMessage()
     };
     const onChangeMessage = (e: ChangeEvent<HTMLTextAreaElement>) => {
         let newMessage = e.currentTarget.value;
-       props.onChangeMessage(newMessage)
+       props.ChangeMessage(newMessage)
     };
 
 

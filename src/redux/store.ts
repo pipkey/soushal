@@ -55,31 +55,34 @@ export const UNFOLLOW = "UNFOLLOW";
 export const SET_USERS = "SET_USERS";
 export const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
 export const SET_USER_TOTAL_COUNT = "SET_USER_TOTAL_COUNT";
+export const TOGGLE_IS_FETCHING = "TOGGLE_IS_FETCHING";
 
 //Types of action
 export type AllActionTypes =
-    ReturnType<typeof addPostAC> |
-    ReturnType<typeof ChangePostAC> |
-    ReturnType<typeof NewMessageAC> |
-    ReturnType<typeof ChangeMessageAC> |
-    ReturnType<typeof unFollowAC> |
-    ReturnType<typeof followAC> |
-    ReturnType<typeof setUsersAC> |
-    ReturnType<typeof setCurrentPageAC>|
-    ReturnType<typeof setUserTotalCountAC>
+    ReturnType<typeof addPost> |
+    ReturnType<typeof ChangePost> |
+    ReturnType<typeof NewMessage> |
+    ReturnType<typeof ChangeMessage> |
+    ReturnType<typeof unFollow> |
+    ReturnType<typeof follow> |
+    ReturnType<typeof setUsers> |
+    ReturnType<typeof setCurrentPage>|
+    ReturnType<typeof setUserTotalCount>|
+    ReturnType<typeof toogleIsFetching>
 
 
 // Action Creators
-export const addPostAC = () => ({type: ADD_POST} as const);
-export const ChangePostAC = (newText: string) => ({type: CHANGE_POST_TEXT, newText: newText} as const);
-export const NewMessageAC = () => ({type: ADD_NEW_MESSAGE} as const);
-export const ChangeMessageAC = (newMessage: string) => (
+export const addPost = () => ({type: ADD_POST} as const);
+export const ChangePost = (newText: string) => ({type: CHANGE_POST_TEXT, newText: newText} as const);
+export const NewMessage = () => ({type: ADD_NEW_MESSAGE} as const);
+export const ChangeMessage = (newMessage: string) => (
     {type: CHANGE_NEW_MESSAGE, newMessage: newMessage} as const);
-export const followAC = (userId: number) => ({type: FOLLOW, userId} as const);
-export const unFollowAC = (userId: number) => ({type: UNFOLLOW, userId} as const);
-export const setUsersAC = (users: Array<UsersType>) => ({type: SET_USERS, users} as const);
-export const setCurrentPageAC = (currentPage:number) => ({type: SET_CURRENT_PAGE, currentPage} as const);
-export const setUserTotalCountAC = (totalCount:number) => ({type: SET_USER_TOTAL_COUNT, totalCount} as const);
+export const follow = (userId: number) => ({type: FOLLOW, userId} as const);
+export const unFollow = (userId: number) => ({type: UNFOLLOW, userId} as const);
+export const setUsers = (users: Array<UsersType>) => ({type: SET_USERS, users} as const);
+export const setCurrentPage = (currentPage:number) => ({type: SET_CURRENT_PAGE, currentPage} as const);
+export const setUserTotalCount = (totalCount:number) => ({type: SET_USER_TOTAL_COUNT, totalCount} as const);
+export const toogleIsFetching = (isFetching:boolean) => ({type: TOGGLE_IS_FETCHING, isFetching} as const);
 
 
 // STORE
