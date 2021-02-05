@@ -7,10 +7,14 @@
 .header img {
       width: 60px;
     }
-
-.header h1{
-    margin-right: 10px;
-      color:white;
-      float: right;
-      text-align: center;
-    }
+.loginBlock{
+    float: right;
+    margin-right: 20px;
+    margin-top: 5px;
+    font-size: 30px;
+    color: white;
+}
+.loginBlock a {
+    color: white;
+    text-decoration: none;
+}

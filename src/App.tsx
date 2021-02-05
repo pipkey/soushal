@@ -1,27 +1,28 @@
 import React from "react";
 import "./App.css";
-import Header from "./components/Heder/Header";
 import NavBar from "./components/Navbar/Navbar";
 import {Route} from "react-router-dom";
 import Music from "./components/Navbar/Music/Music";
 import News from "./components/Navbar/News/News";
 import Settings from "./components/Navbar/Settings/Settings";
-import {Profile} from "./components/Profile/Profile";
 import Friends from "./components/Navbar/Friends/Friends";
 import DialogsContainer from "./components/Navbar/Dialogs/DialogsContainer";
 import UsersContainer from "./components/Users/UsersContainer";
+import ProfileContainer from "./components/Profile/ProfileContainer";
+import HeaderContainer from "./components/Heder/HeaderContainer";
 
 
 const App: React.FC = () => {
     return (
 
         <div className="app-wrapper">
-            <Header/>
+            <HeaderContainer/>
+
             <NavBar/>
 
             <div className="app-wrapper-content">
-                <Route path={"/profile"}
-                       render={() => <Profile/>}/>
+                <Route path={"/profile/:userId"}
+                       render={() => <ProfileContainer />}/>
 
                 <Route path={"/dialogs"}
                        render={() => <DialogsContainer/>}/>

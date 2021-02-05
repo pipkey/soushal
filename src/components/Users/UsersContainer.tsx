@@ -10,9 +10,9 @@ import {
     unFollow
 } from "../../redux/store";
 import {UsersType} from "../../redux/users-reducer";
-import axios from "axios";
 import Users from "./Users";
 import preloader from "../../assets/images/grid.svg"
+import {getUsers} from "../../api/api";
 
 //types
 export type UsersPropsType = {
@@ -26,7 +26,7 @@ export type UsersPropsType = {
     setUserTotalCount: (totalCount: number) => void
     currentPage: number
     isFetching: boolean
-    toogleIsFetching: (isFetching:boolean) => void
+    toogleIsFetching: (isFetching: boolean) => void
 }
 type MapStatPropsType = {
     users: Array<UsersType>
@@ -35,14 +35,6 @@ type MapStatPropsType = {
     currentPage: number
     isFetching: boolean
 };
-type MapDispPropsType = {
-    follow: (userId: number) => void
-    unFollow: (userId: number) => void
-    setUsers: (users: Array<UsersType>) => void
-    setCurrentPage: (num: number) => void
-    setTotalUsersCount: (totalCount: number) => void
-    toogleIsFetching: (isFetching:boolean) => void
-};
 
 //end types
 
@@ -50,21 +42,23 @@ class UsersContainer extends React.Component<UsersPropsType> {
 
     componentDidMount(): void {
         this.props.toogleIsFetching(true);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
-            .then(response => {
+        getUsers(this.props.pageSize, this.props.currentPage)
+            .then(data => {
+                debugger;
                 this.props.toogleIsFetching(false);
-                this.props.setUsers(response.data.items);
-                this.props.setUserTotalCount(response.data.totalCount)
+                this.props.setUsers(data.items);
+                this.props.setUserTotalCount(data.totalCount)
             })
     }
 
     onPageChanger = (pageNumber: number) => {
         this.props.setCurrentPage(pageNumber);
         this.props.toogleIsFetching(true);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`)
-            .then(response => {
+        getUsers(pageNumber, this.props.pageSize)
+            .then(data => {
+                debugger;
                 this.props.toogleIsFetching(false);
-                this.props.setUsers(response.data.items)
+                this.props.setUsers(data.items)
             })
     };
 
@@ -107,7 +101,7 @@ const mapStateToProps = (state: RootStateType): MapStatPropsType => {
 
 export default connect(mapStateToProps,
     {
-    follow, unFollow, setUsers,
-    setCurrentPage, setUserTotalCount, toogleIsFetching
-})(UsersContainer);
+        follow, unFollow, setUsers,
+        setCurrentPage, setUserTotalCount, toogleIsFetching
+    })(UsersContainer);
 

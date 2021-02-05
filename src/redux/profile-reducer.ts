@@ -1,4 +1,5 @@
-import {ADD_POST, AllActionTypes, ProfilePageType, CHANGE_POST_TEXT} from "./store";
+import {ADD_POST, AllActionTypes, CHANGE_POST_TEXT, ProfilePageType, SET_USER_PROFILE} from "./store";
+import {ProfileType} from "../components/Profile/ProfileContainer";
 
 
 let InitialState: ProfilePageType = {
@@ -10,8 +11,8 @@ let InitialState: ProfilePageType = {
         {id: 4, message: "go home", likeCounts: 22},
         {id: 5, message: "we live in your dream", likeCounts: 11}
     ],
-
-    newPostText: "hello my dear friends"
+    newPostText: "hello my dear friends",
+    profile: {} as ProfileType
 };
 
 
@@ -19,16 +20,14 @@ const profileReducer = (state: ProfilePageType = InitialState, action: AllAction
 
     switch (action.type) {
         case ADD_POST:
-            return {
-                ...state,
-                newPostText: "",
-                postsDate: [...state.postsDate, {id: 5, message: state.newPostText, likeCounts: 0}]
+            return {...state, newPostText: "",
+                postsDate:
+                    [...state.postsDate, {id: 5, message: state.newPostText, likeCounts: 0}]
             };
         case CHANGE_POST_TEXT:
-            return {
-                ...state,
-                newPostText: action.newText
-            };
+            return {...state, newPostText: action.newText};
+        case SET_USER_PROFILE:
+            return {...state, profile: action.profile};
         default:
             return state
     }
