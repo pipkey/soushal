@@ -67,6 +67,7 @@ export const SET_USER_TOTAL_COUNT = "SET_USER_TOTAL_COUNT";
 export const TOGGLE_IS_FETCHING = "TOGGLE_IS_FETCHING";
 export const SET_USER_PROFILE = "SET_USER_PROFILE";
 export const SET_USER_DATA = "SET_USER_DATA";
+export const TOOGLE_IS_FOLLOWING = "TOOGLE_IS_FOLLOWING ";
 
 
 //Types of action
@@ -82,7 +83,9 @@ export type AllActionTypes =
     ReturnType<typeof setUserTotalCount> |
     ReturnType<typeof toogleIsFetching> |
     ReturnType<typeof setUserProfile> |
-    ReturnType<typeof setUserData>
+    ReturnType<typeof setUserData>|
+    ReturnType<typeof toogleIsFollowing>
+
 
 
 // Action Creators
@@ -100,6 +103,8 @@ export const setCurrentPage = (currentPage: number) => ({type: SET_CURRENT_PAGE,
 export const setUserTotalCount = (totalCount: number) => ({type: SET_USER_TOTAL_COUNT, totalCount} as const);
 //loading
 export const toogleIsFetching = (isFetching: boolean) => ({type: TOGGLE_IS_FETCHING, isFetching} as const);
+export const toogleIsFollowing = (followingInProgress: boolean, userId:number) =>
+    ({type: TOOGLE_IS_FOLLOWING, followingInProgress, userId} as const);
 //profile
 export const setUserProfile = (profile: ProfileType) => ({type: SET_USER_PROFILE, profile} as const);
 // auth

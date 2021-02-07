@@ -3,7 +3,7 @@ import s from "./users.module.css";
 import UserPhoto from "../../assets/images/user.png.png";
 import {UsersType} from "../../redux/users-reducer";
 import {NavLink} from "react-router-dom";
-import axios from "axios";
+import {usersAPI} from "../../api/api";
 
 type UsersPropsType = {
     onPageChanger: (num: number) => void
@@ -13,6 +13,8 @@ type UsersPropsType = {
     unFollow: (userId: number) => void
     users: Array<UsersType>
     currentPage: number
+    toogleIsFollowing:( followInProgress:boolean,userId:number )=> void
+    followInProgress:Array<any>
 }
 
 
@@ -39,38 +41,44 @@ const Users = (props: UsersPropsType) => {
                         <img src={u.photos.small ? u.photos.small : UserPhoto} className={s.photo} alt="sss"/>
                     </NavLink>
                 </div>
-                <div>
+                <div className="BTN">
                     {u.followed
-                        ? <button onClick={() => {
-                            axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`,
-                                {withCredentials:true,
-                                    headers: {
-                                    "API-KEY": "c0b41f08-198a-4e54-8351-7c86337bdf85"
-                                    }
-                            })
-                                .then(response => {
-                                    if (response.data.resultCode === 0){
-                                        props.unFollow(u.id)
-                                    }
-                                });
-
-                        }}>UNFOLLOW</button>
-
-                        : <button onClick={() => {
-                            axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {},{
-                                withCredentials:true,
-                                headers: {
-                                    "API-KEY": "c0b41f08-198a-4e54-8351-7c86337bdf85"
+                        ? <button disabled={props.followInProgress.some(id=> id === u.id)} onClick={() => {
+                            {
+                                {
+                                    props.toogleIsFollowing(true, u.id)
                                 }
-                            })
-                                .then(response => {
-                                    if (response.data.resultCode === 0){
-                                        props.follow(u.id)
-                                    }
-                                });
+                                usersAPI.UnFollowUsers(u.id)
+                                    .then(response => {
+                                            if (response.data.resultCode === 0) {
+                                                props.unFollow(u.id)
+                                            }
+                                            {
+                                                props.toogleIsFollowing(false, u.id)
+                                            }
+                                        }
+                                    )
+                            }
+                        }}> UNFOLLOW </button>
 
-                        }}>FOLLOW</button>}
-
+                        : <button disabled={props.followInProgress.some(id=> id === u.id)} onClick={() => {
+                            {
+                                props.toogleIsFollowing(true, u.id)
+                            }
+                            {
+                                usersAPI.FollowUsers(u.id)
+                                    .then(response => {
+                                            if (response.data.resultCode === 0) {
+                                                props.follow(u.id)
+                                            }
+                                            {
+                                                props.toogleIsFollowing(false, u.id)
+                                            }
+                                        }
+                                    )
+                            }
+                        }}>FOLLOW</button>
+                    }
                 </div>
             </span>
                 <span>
