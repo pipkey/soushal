@@ -16,7 +16,7 @@ export const usersAPI = {
                 return response.data
             })
     },
-//
+
     UnFollowUsers(id: number) {
         return instance.delete(`follow/${id}`)
     },
@@ -25,11 +25,14 @@ export const usersAPI = {
     },
 };
 
+export const profileAPI = {
+    setUserProfile(id:string) {
+        return instance.get(`profile/${id}`)
 
-//
-// export const FollowUsers = (currentPage: number,pageSize:number ) => {
-//   return   insanse.get(`users?page=${currentPage}&count=${pageSize}`)
-//       .then(response => {
-//           return response.data
-//       } )
-// };
+    }
+};
+export const headerAPI = {
+    setDataUser() {
+        return instance.get(`auth/me`)
+    }
+};

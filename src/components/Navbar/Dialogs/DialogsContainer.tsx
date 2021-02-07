@@ -1,13 +1,14 @@
 import React from "react";
-import {ChangeMessage, MessagePageType, NewMessage, RootStateType} from "../../../redux/store";
+import { MessagePageType, RootStateType} from "../../../redux/store";
 import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
+import {NewMessage, ChangeMessage} from "../../../redux/dialog-reducer";
 
 //Types container
-type MapDisType = {
-    addMessage: () => void
-    onChangeMessage: (value: string) => void
-};
+// type MapDisType = {
+//     addMessage: () => void
+//     onChangeMessage: (value: string) => void
+// };
 type MapStateType = {
     messagePage: MessagePageType
     newMessage: string
@@ -32,8 +33,7 @@ let mapStateToProps = (state: RootStateType): MapStateType => {
 // };
 
 const DialogsContainer = connect(mapStateToProps, {
-    NewMessage: NewMessage,
-    ChangeMessage: ChangeMessage
+  NewMessage, ChangeMessage
 })(Dialogs);
 
 

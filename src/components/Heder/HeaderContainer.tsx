@@ -1,8 +1,8 @@
 import React from "react";
 import Header from "./Header";
-import axios from "axios";
 import {connect} from "react-redux";
-import {RootStateType, setUserData, AuthDataType} from "../../redux/store";
+import {RootStateType} from "../../redux/store";
+import {AuthDataType, setDataUser} from "../../redux/auth-reducer";
 
 
 type mapStateToPropsType ={
@@ -17,17 +17,12 @@ const mapStateToProps =(state:RootStateType): mapStateToPropsType =>({
     login: state.auth.login
 });
 type AuthCallBack ={
-    setUserData: (id: number | null, email: string | null, login: string | null)=>void
+    setDataUser: ()=>void
 }
 
 class HeaderContainer  extends React.Component<OWNtypes> {
   componentDidMount(): void {
-      axios.get(`https://social-network.samuraijs.com/api/1.0/auth/me`,{withCredentials:true})
-      .then(response => {
-          if (response.data.resultCode === 0) {
-              let {id, email, login} = response.data.data;
-              this.props.setUserData(id, email, login)
-          }})
+      this.props.setDataUser()
   }
 
     render() {
@@ -37,4 +32,4 @@ class HeaderContainer  extends React.Component<OWNtypes> {
 
 
 
-export default connect(mapStateToProps, {setUserData})(HeaderContainer);
+export default connect(mapStateToProps, {setDataUser})(HeaderContainer);

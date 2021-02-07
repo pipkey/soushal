@@ -1,5 +1,8 @@
-import {InitialType, UsersType} from "./users-reducer";
+import {InitialType, UsersActionTypes} from "./users-reducer";
 import {ProfileType} from "../components/Profile/ProfileContainer";
+import {AuthActionType, AuthDataType} from "./auth-reducer";
+import {DialogActionType} from "./dialog-reducer";
+import {ProfileActionType} from "./profile-reducer";
 
 export const imgObj = {
     img1: "https://www.meme-arsenal.com/memes/8c4efb9bdbe32514cd7b64ec5e2e1fd1.jpg",
@@ -8,12 +11,20 @@ export const imgObj = {
     img4: "https://klike.net/uploads/posts/2019-03/1551596697_5.jpg",
     img5: "https://klike.net/uploads/posts/2019-03/medium/1551512888_2.jpg"
 };
-export type AuthDataType = {
-    id?: number | null
-    email?: string | null
-    login: string | null
-    isAuth: boolean
-}
+// export type AuthDataType = {
+//     id?: number | null
+//     email?: string | null
+//     login: string | null
+//     isAuth: boolean
+// }
+
+export type AllActionType =
+    ProfileActionType
+    & AuthActionType
+    & DialogActionType
+    & UsersActionTypes
+
+
 export type RootStateType = {
     profilePage: ProfilePageType
     messagePage: MessagePageType
@@ -51,67 +62,38 @@ export type StoreType = {
     _onChange: () => void
     subscriber: any
     getState: () => RootStateType
-    dispatch: (action: AllActionTypes) => void
+    dispatch: (action:AllActionType ) => void
 }
 
 // AC type bind
-export const ADD_POST = "ADD-POST";
-export const CHANGE_POST_TEXT = "CHANGE-POST-TEXT";
-export const ADD_NEW_MESSAGE = "ADD-NEW-MESSAGE";
-export const CHANGE_NEW_MESSAGE = "CHANGE-NEW-MESSAGE";
-export const FOLLOW = "FOLLOW";
-export const UNFOLLOW = "UNFOLLOW";
-export const SET_USERS = "SET_USERS";
-export const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
-export const SET_USER_TOTAL_COUNT = "SET_USER_TOTAL_COUNT";
-export const TOGGLE_IS_FETCHING = "TOGGLE_IS_FETCHING";
-export const SET_USER_PROFILE = "SET_USER_PROFILE";
-export const SET_USER_DATA = "SET_USER_DATA";
-export const TOOGLE_IS_FOLLOWING = "TOOGLE_IS_FOLLOWING ";
+
 
 
 //Types of action
-export type AllActionTypes =
-    ReturnType<typeof addPost> |
-    ReturnType<typeof ChangePost> |
-    ReturnType<typeof NewMessage> |
-    ReturnType<typeof ChangeMessage> |
-    ReturnType<typeof unFollow> |
-    ReturnType<typeof follow> |
-    ReturnType<typeof setUsers> |
-    ReturnType<typeof setCurrentPage> |
-    ReturnType<typeof setUserTotalCount> |
-    ReturnType<typeof toogleIsFetching> |
-    ReturnType<typeof setUserProfile> |
-    ReturnType<typeof setUserData>|
-    ReturnType<typeof toogleIsFollowing>
-
-
-
 // Action Creators
 //Posts
-export const addPost = () => ({type: ADD_POST} as const);
-export const ChangePost = (newText: string) => ({type: CHANGE_POST_TEXT, newText: newText} as const);
-export const NewMessage = () => ({type: ADD_NEW_MESSAGE} as const);
-export const ChangeMessage = (newMessage: string) => (
-    {type: CHANGE_NEW_MESSAGE, newMessage: newMessage} as const);
+// export const addPost = () => ({type: ADD_POST} as const);
+// export const ChangePost = (newText: string) => ({type: CHANGE_POST_TEXT, newText: newText} as const);
+// export const NewMessage = () => ({type: ADD_NEW_MESSAGE} as const);
+// export const ChangeMessage = (newMessage: string) => (
+//     {type: CHANGE_NEW_MESSAGE, newMessage: newMessage} as const);
 //users
-export const follow = (userId: number) => ({type: FOLLOW, userId} as const);
-export const unFollow = (userId: number) => ({type: UNFOLLOW, userId} as const);
-export const setUsers = (users: Array<UsersType>) => ({type: SET_USERS, users} as const);
-export const setCurrentPage = (currentPage: number) => ({type: SET_CURRENT_PAGE, currentPage} as const);
-export const setUserTotalCount = (totalCount: number) => ({type: SET_USER_TOTAL_COUNT, totalCount} as const);
-//loading
-export const toogleIsFetching = (isFetching: boolean) => ({type: TOGGLE_IS_FETCHING, isFetching} as const);
-export const toogleIsFollowing = (followingInProgress: boolean, userId:number) =>
-    ({type: TOOGLE_IS_FOLLOWING, followingInProgress, userId} as const);
+// export const follow = (userId: number) => ({type: FOLLOW, userId} as const);
+// export const unFollow = (userId: number) => ({type: UNFOLLOW, userId} as const);
+// export const setUsers = (users: Array<UsersType>) => ({type: SET_USERS, users} as const);
+// export const setCurrentPage = (currentPage: number) => ({type: SET_CURRENT_PAGE, currentPage} as const);
+// export const setUserTotalCount = (totalCount: number) => ({type: SET_USER_TOTAL_COUNT, totalCount} as const);
+// //loading
+// export const toogleIsFetching = (isFetching: boolean) => ({type: TOGGLE_IS_FETCHING, isFetching} as const);
+// export const toogleIsFollowing = (followingInProgress: boolean, userId:number) =>
+//     ({type: TOOGLE_IS_FOLLOWING, followingInProgress, userId} as const);
 //profile
-export const setUserProfile = (profile: ProfileType) => ({type: SET_USER_PROFILE, profile} as const);
+// export const setUserProfile = (profile: ProfileType) => ({type: SET_USER_PROFILE, profile} as const);
 // auth
-export const setUserData = (id: number | null, email: string | null, login: string | null) => ({
-    type: SET_USER_DATA,
-    data: {id, email, login}
-} as const);
+// export const setUserData = (id: number | null, email: string | null, login: string | null) => ({
+//     type: SET_USER_DATA,
+//     data: {id, email, login}
+// } as const);
 
 // STORE
 

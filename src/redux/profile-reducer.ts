@@ -1,6 +1,22 @@
-import {ADD_POST, AllActionTypes, CHANGE_POST_TEXT, ProfilePageType, SET_USER_PROFILE} from "./store";
+import {ProfilePageType} from "./store";
 import {ProfileType} from "../components/Profile/ProfileContainer";
+import {Dispatch} from "redux";
+import {profileAPI} from "../api/api";
 
+// AC type bind
+export const ADD_POST = "ADD-POST";
+export const CHANGE_POST_TEXT = "CHANGE-POST-TEXT";
+export const SET_USER_PROFILE = "SET_USER_PROFILE";
+
+
+//Profile Action Types
+
+export type ProfileActionType =
+    ReturnType<typeof addPost> |
+    ReturnType<typeof ChangePost> |
+    ReturnType<typeof setUserProfile>
+
+//END Profile Action Types
 
 let InitialState: ProfilePageType = {
 
@@ -16,11 +32,12 @@ let InitialState: ProfilePageType = {
 };
 
 
-const profileReducer = (state: ProfilePageType = InitialState, action: AllActionTypes) => {
+const profileReducer = (state: ProfilePageType = InitialState, action: ProfileActionType) => {
 
     switch (action.type) {
         case ADD_POST:
-            return {...state, newPostText: "",
+            return {
+                ...state, newPostText: "",
                 postsDate:
                     [...state.postsDate, {id: 5, message: state.newPostText, likeCounts: 0}]
             };
@@ -32,6 +49,21 @@ const profileReducer = (state: ProfilePageType = InitialState, action: AllAction
             return state
     }
 };
+
+// Action Creators
+
+export const addPost = () => ({type: ADD_POST} as const);
+export const ChangePost = (newText: string) => ({type: CHANGE_POST_TEXT, newText: newText} as const);
+export const setUserProfile = (profile: ProfileType) => ({type: SET_USER_PROFILE, profile} as const);
+
+// end Action Creators
+
+export const getUserProfile = (id: string) => (dispatch: Dispatch) => {
+        profileAPI.setUserProfile(id)
+            .then(response => {
+                dispatch(setUserProfile(response.data));
+            })
+    };
 
 
 

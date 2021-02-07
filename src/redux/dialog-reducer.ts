@@ -1,5 +1,24 @@
-import {AllActionTypes, imgObj, MessagePageType, ADD_NEW_MESSAGE, CHANGE_NEW_MESSAGE} from "./store";
+import {imgObj, MessagePageType} from "./store";
 
+// AC type bind
+export const ADD_NEW_MESSAGE = "ADD-NEW-MESSAGE";
+export const CHANGE_NEW_MESSAGE = "CHANGE-NEW-MESSAGE";
+
+// Action Creators
+export const NewMessage = () => ({type: ADD_NEW_MESSAGE} as const);
+export const ChangeMessage = (newMessage: string) => (
+    {type: CHANGE_NEW_MESSAGE, newMessage: newMessage} as const);
+
+// end Action Creators
+
+//Profile Action Types
+
+export type DialogActionType =
+    ReturnType<typeof NewMessage> |
+    ReturnType<typeof ChangeMessage>
+
+
+//END Profile Action Types
 
 let initialState: MessagePageType = {
 
@@ -32,7 +51,7 @@ let initialState: MessagePageType = {
 };
 
 
-const dialogReducer = (state: MessagePageType = initialState, action: AllActionTypes) => {
+const dialogReducer = (state: MessagePageType = initialState, action: DialogActionType ) => {
 
     switch (action.type) {
         case ADD_NEW_MESSAGE:

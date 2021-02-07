@@ -1,13 +1,13 @@
-import {combineReducers, createStore} from "redux";
+import {applyMiddleware, combineReducers, createStore} from "redux";
 import profileReducer from "./profile-reducer";
 import dialogReducer from "./dialog-reducer";
 import sidebarReducer from "./sidebar-reducer";
-import {AllActionTypes} from "./store";
 import usersReducer from "./users-reducer";
 import authReducer from "./auth-reducer";
+import {AllActionType} from "./store";
+import thunkMiddleware from "redux-thunk"
 
-
-export type dispatchType = (action: AllActionTypes) => void
+export type dispatchType = (action: AllActionType) => void
 
 let reducers = combineReducers({
     profilePage: profileReducer,
@@ -18,7 +18,7 @@ let reducers = combineReducers({
 });
 
 
-let store = createStore(reducers);
+let store = createStore(reducers,applyMiddleware(thunkMiddleware));
 
 
 // @ts-ignore

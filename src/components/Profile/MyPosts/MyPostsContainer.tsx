@@ -1,14 +1,12 @@
 import React from "react";
-import {addPost, ChangePost, PostType, RootStateType} from "../../../redux/store"
+import {PostType, RootStateType} from "../../../redux/store"
 import MyPosts from "./MyPosts";
 import {connect} from "react-redux";
+import {addPost, ChangePost} from "../../../redux/profile-reducer";
 
 
 //type
- type MapDisProType = {
-    addPosts: () => void
-    onPostChange: (newText: string) => void
-}
+
 type MapStateProType = {
     newPostText: string
     posts:Array<PostType>
@@ -22,16 +20,7 @@ let mapStateToProps = (state: RootStateType): MapStateProType => {
         posts: state.profilePage.postsDate
     }
 };
-// let mapDispatchToProps = (dispatch: dispatchType): MapDisProType => {
-//     return {
-//         addPosts: () => {
-//             dispatch(addPostAC());
-//         },
-//         onPostChange: (newText: string) => {
-//             dispatch(ChangePostAC(newText))
-//         }
-//     }
-// };
+
 //end functions
 
 const MyPostsContainer = connect(mapStateToProps, {
