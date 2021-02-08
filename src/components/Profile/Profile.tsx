@@ -3,6 +3,7 @@ import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import MyPostsContainer from "./MyPosts/MyPostsContainer";
 import {ProfileType} from "./ProfileContainer";
 
+
 type ProfilePType={
     profile: ProfileType
 
@@ -10,9 +11,12 @@ type ProfilePType={
 
 
 export const Profile = (props:ProfilePType) => {
+
+
+
     return (
         <div>
-            <ProfileInfo profile={props.profile}/>
+            <ProfileInfo profile={props.profile} />
             <MyPostsContainer/>
         </div>
     )

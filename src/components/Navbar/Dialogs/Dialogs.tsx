@@ -5,16 +5,18 @@ import Message from "./Messages/Message";
 import {MessagePageType} from "../../../redux/store";
 
 
+
 type MessagePropsType = {
     messagePage: MessagePageType
     newMessage:string
     NewMessage:()=>void
     ChangeMessage:(value:string)=>void
+    isAuth:boolean
 }
 
 
 const Dialogs = (props: MessagePropsType) => {
-
+debugger;
     let dialogsElement = props.messagePage.dialogsDate.map(dialog => < DialogItem id={dialog.id}
                                                                                   name={dialog.name}
                                                                                   img={dialog.img}/>);
@@ -29,6 +31,7 @@ const Dialogs = (props: MessagePropsType) => {
         let newMessage = e.currentTarget.value;
        props.ChangeMessage(newMessage)
     };
+
 
 
     return (

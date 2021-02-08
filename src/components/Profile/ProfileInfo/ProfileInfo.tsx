@@ -4,10 +4,10 @@ import {ProfileType} from "../ProfileContainer";
 
 type ProfileinfoType ={
     profile: ProfileType
-
 }
 
 const ProfileInfo = (props:ProfileinfoType) => {
+
     return (
         <div >
             <img  className={ss.main} src="https://i0.wp.com/www.courthousenews.com/wp-content/uploads/2017/09/White-tiger.jpg" />

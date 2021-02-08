@@ -9,6 +9,8 @@ import thunkMiddleware from "redux-thunk"
 
 export type dispatchType = (action: AllActionType) => void
 
+
+
 let reducers = combineReducers({
     profilePage: profileReducer,
     messagePage: dialogReducer,
