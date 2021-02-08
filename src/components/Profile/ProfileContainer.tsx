@@ -5,6 +5,7 @@ import {RootStateType} from "../../redux/store";
 import {RouteComponentProps, withRouter} from "react-router";
 import {getUserProfile} from "../../redux/profile-reducer";
 import {withAuthRedirect} from "../../HOC/withAuthRedirect";
+import {compose} from "redux";
 
 
 
@@ -78,6 +79,8 @@ let mapStateToProps = (state: RootStateType):mapPapType => ({
     // isAuth: state.auth.isAuth
 });
 
-let WithURLDataContainerComponent = withRouter(ProfileContainer);
+// let WithURLDataContainerComponent = withRouter(ProfileContainer);
+// export default withAuthRedirect( connect(mapStateToProps, {getUserProfile})(WithURLDataContainerComponent));
 
-export default withAuthRedirect( connect(mapStateToProps, {getUserProfile})(WithURLDataContainerComponent));
+export default compose<React.ComponentType>(
+    connect(mapStateToProps, {getUserProfile}),withRouter,withAuthRedirect)(ProfileContainer)

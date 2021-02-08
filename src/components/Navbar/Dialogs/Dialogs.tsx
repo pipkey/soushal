@@ -16,7 +16,7 @@ type MessagePropsType = {
 
 
 const Dialogs = (props: MessagePropsType) => {
-debugger;
+
     let dialogsElement = props.messagePage.dialogsDate.map(dialog => < DialogItem id={dialog.id}
                                                                                   name={dialog.name}
                                                                                   img={dialog.img}/>);
