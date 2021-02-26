@@ -36,6 +36,7 @@ export type ProfilePageType = {
     postsDate: Array<PostType>
     newPostText: string
     profile: ProfileType
+    status:string
 }
 export type MessagePageType = {
     messageDate: Array<MessageType>
