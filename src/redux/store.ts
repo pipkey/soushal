@@ -31,17 +31,16 @@ export type RootStateType = {
     sidebar: SidebarType
     usersPage: InitialType
     auth: AuthDataType
+
 }
 export type ProfilePageType = {
     postsDate: Array<PostType>
-    newPostText: string
     profile: ProfileType
     status:string
 }
 export type MessagePageType = {
     messageDate: Array<MessageType>
     dialogsDate: Array<DialogType>
-    newMessageText: string
 }
 export type MessageType = {
     id: number

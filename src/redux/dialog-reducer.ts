@@ -2,20 +2,18 @@ import {imgObj, MessagePageType} from "./store";
 
 // AC type bind
 export const ADD_NEW_MESSAGE = "ADD-NEW-MESSAGE";
-export const CHANGE_NEW_MESSAGE = "CHANGE-NEW-MESSAGE";
+
 
 // Action Creators
-export const NewMessage = () => ({type: ADD_NEW_MESSAGE} as const);
-export const ChangeMessage = (newMessage: string) => (
-    {type: CHANGE_NEW_MESSAGE, newMessage: newMessage} as const);
+export const NewMessage = (newMessage:string) => ({type: ADD_NEW_MESSAGE,newMessage} as const);
 
 // end Action Creators
 
 //Profile Action Types
 
 export type DialogActionType =
-    ReturnType<typeof NewMessage> |
-    ReturnType<typeof ChangeMessage>
+    ReturnType<typeof NewMessage>
+
 
 
 //END Profile Action Types
@@ -45,9 +43,7 @@ let initialState: MessagePageType = {
         {id: 3, message: "well done"},
         {id: 4, message: "beer?"},
         {id: 5, message: "we will go to cinema"}
-    ],
-
-    newMessageText: ""
+    ]
 };
 
 
@@ -57,15 +53,9 @@ const dialogReducer = (state: MessagePageType = initialState, action: DialogActi
         case ADD_NEW_MESSAGE:
             return {
                 ...state,
-                newMessageText: "",
                 messageDate: [...state.messageDate,
-                    {id: 7, message: state.newMessageText}
+                    {id: 7, message: action.newMessage}
                 ]
-            };
-        case CHANGE_NEW_MESSAGE:
-            return {
-                ...state,
-                newMessageText: action.newMessage
             };
     }
     return state

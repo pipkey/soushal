@@ -27,6 +27,13 @@ export class ProfileStatus extends React.Component<ProfileStatusType> {
         });
         this.props.updateStatus(this.state.status)
     };
+    componentDidUpdate(prevProps: ProfileStatusType,prevState:any ){
+        if(prevProps.status !== this.props.status){
+            this.setState({
+                status: this.props.status
+            })
+        }
+    }
 
 
     render() {
@@ -39,7 +46,7 @@ export class ProfileStatus extends React.Component<ProfileStatusType> {
                         value={this.state.status}
                         autoFocus={true}
                     />
-                    : <span onDoubleClick={this.ActiveMode.bind(this)}> {this.props.status || "say Hello"} </span>
+                    : <span onDoubleClick={this.ActiveMode.bind(this)}> {this.props.status} </span>
                 }
             </div>
 
