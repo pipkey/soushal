@@ -1,4 +1,5 @@
 import axios from "axios";
+import {FormDataType} from "../components/Login/Login";
 
 const instance = axios.create({
     withCredentials: true,
@@ -40,5 +41,12 @@ export const profileAPI = {
 export const headerAPI = {
     setDataUser() {
         return instance.get(`auth/me`)
+    },
+    login(formData:FormDataType) {
+        debugger
+        return instance.post(`auth/login`, formData)
+    },
+    logOut() {
+        return instance.delete(`auth/login`)
     }
 };
