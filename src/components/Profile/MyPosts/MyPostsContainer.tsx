@@ -1,8 +1,8 @@
-import React from "react";
-import {PostType, RootStateType} from "../../../redux/store"
+import {PostType} from "../../../redux/store"
 import MyPosts from "./MyPosts";
 import {connect} from "react-redux";
 import {addPost} from "../../../redux/profile-reducer";
+import {AppRootStateType} from "../../../redux/redux-store";
 
 //type
 type MapStateProType = {
@@ -11,7 +11,7 @@ type MapStateProType = {
 //end type
 
 //functions
-let mapStateToProps = (state: RootStateType): MapStateProType => {
+let mapStateToProps = (state: AppRootStateType): MapStateProType => {
     return {
         posts: state.profilePage.postsDate
     }

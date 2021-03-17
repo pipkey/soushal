@@ -1,6 +1,5 @@
 import React from "react";
 import {connect} from "react-redux";
-import {RootStateType} from "../../redux/store";
 import {
     follow,
     getUsers,
@@ -10,6 +9,7 @@ import {
 } from "../../redux/users-reducer";
 import Users from "./Users";
 import preloader from "../../assets/images/grid.svg"
+import {AppRootStateType} from "../../redux/redux-store";
 
 //types
 export type UsersPropsType = {
@@ -47,7 +47,7 @@ class UsersContainer extends React.Component<UsersPropsType> {
 
     render() {
         return <>
-            {this.props.isFetching ? <img src={preloader}/> : null}
+            {this.props.isFetching ? <img src={preloader} alt="load"/> : null}
             <Users
                 onPageChanger={this.onPageChanger}
                 totalUsersCount={this.props.totalUsersCount}
@@ -62,7 +62,7 @@ class UsersContainer extends React.Component<UsersPropsType> {
     }
 }
 
-const mapStateToProps = (state: RootStateType): MapStatPropsType => {
+const mapStateToProps = (state: AppRootStateType): MapStatPropsType => {
     return {
         users: state.usersPage.users,
         pageSize: state.usersPage.pageSize,

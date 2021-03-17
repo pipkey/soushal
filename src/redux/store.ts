@@ -1,6 +1,5 @@
-import {InitialType, UsersActionTypes} from "./users-reducer";
+import {UsersActionTypes} from "./users-reducer";
 import {ProfileType} from "../components/Profile/ProfileContainer";
-import {AuthActionType, AuthDataType} from "./auth-reducer";
 import {DialogActionType} from "./dialog-reducer";
 import {ProfileActionType} from "./profile-reducer";
 
@@ -20,19 +19,10 @@ export const imgObj = {
 
 export type AllActionType =
     ProfileActionType
-    & AuthActionType
     & DialogActionType
     & UsersActionTypes
 
 
-export type RootStateType = {
-    profilePage: ProfilePageType
-    messagePage: MessagePageType
-    sidebar: SidebarType
-    usersPage: InitialType
-    auth: AuthDataType
-
-}
 export type ProfilePageType = {
     postsDate: Array<PostType>
     profile: ProfileType
@@ -55,15 +45,15 @@ export type PostType = {
     id: number
     message: string
     likeCounts: number
-}
-export type SidebarType = {}
-export type StoreType = {
-    _state: RootStateType
-    _onChange: () => void
-    subscriber: any
-    getState: () => RootStateType
-    dispatch: (action:AllActionType ) => void
-}
+};
+// export type SidebarType = {}
+// export type StoreType = {
+//     _state: RootStateType
+//     _onChange: () => void
+//     subscriber: any
+//     getState: () => RootStateType
+//     dispatch: (action:AllActionType ) => void
+// }
 
 // AC type bind
 

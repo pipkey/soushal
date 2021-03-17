@@ -6,3 +6,11 @@ border: 3px solid rebeccapurple;
 .error span{
     color: rebeccapurple;
 }
+
+.formSummaryError{
+    width: 250px;
+    height: 30px;
+    border: solid 1px red;
+    color: black;
+    text-align: center;
+}

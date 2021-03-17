@@ -1,8 +1,9 @@
 import {headerAPI} from "../api/api";
 import {Dispatch} from "redux";
 import {FormDataType} from "../components/Login/Login";
-import {ThunkAction} from "redux-thunk";
+import {ThunkAction, ThunkDispatch} from "redux-thunk";
 import {AppRootStateType} from "./redux-store";
+import {stopSubmit} from "redux-form";
 
 
 // AC type bind
@@ -16,29 +17,22 @@ export type AuthActionType =
 
 //types
 type ThunkType = ThunkAction<void, AppRootStateType, unknown, AuthActionType>
+export type AuthInitialStateType = typeof initialState
 
-export type AuthDataType = {
-    id?: number | null
-    email?: string | null
-    login: string | null
-    isAuth: boolean
-}
-
-
-let initialState: AuthDataType = {
-    id: null,
-    email: null,
-    login: null,
+let initialState = {
+    id: null as (number | null),
+    email: null as string | null,
+    login: null as string | null,
     isAuth: false
 };
 
 
-const authReducer = (state: AuthDataType = initialState, action: AuthActionType) => {
+const authReducer = (state: AuthInitialStateType = initialState, action: AuthActionType) => {
 
     switch (action.type) {
         case  SET_USER_DATA : {
             return {
-                ...state, ...action.payload, isAuth: true
+                ...state, ...action.payload
             }
         }
         default :
@@ -56,7 +50,7 @@ export const setUserData = (id: number | null, email: string | null, login: stri
 
 //thunk
 export const setDataUserThunk = () => (dispatch: Dispatch) => {
-    headerAPI.setDataUser()
+    return headerAPI.setDataUser()
         .then(response => {
             if (response.data.resultCode === 0) {
                 let {id, email, login} = response.data.data;
@@ -65,22 +59,25 @@ export const setDataUserThunk = () => (dispatch: Dispatch) => {
         })
 
 };
-export const LoginThunk = (formData: FormDataType):ThunkType => (dispatch: Dispatch<any>) => {
+export const LoginThunk = (formData: FormDataType): ThunkType => (dispatch: ThunkDispatch<AppRootStateType, unknown, any>) => {
     headerAPI.login(formData)
-        .then(response => {
-            if (response.data.resultCode === 0) {
+        .then(res => {
+            if (res.data.resultCode === 0) {
                 dispatch(setDataUserThunk())
+            } else {
+                let message = res.data.messages.length > 0 ? res.data.messages[0] : "some error";
+                dispatch(stopSubmit("Login", {_error: message}));
             }
         })
 
 };
 
 
-export const LogOutThunk = (): ThunkType => (dispatch) => {
+export const LogOutThunk = () => (dispatch: Dispatch<any>) => {
     headerAPI.logOut()
         .then(response => {
             if (response.data.resultCode === 0) {
-                 dispatch(setUserData(null, null, null, false));
+                dispatch(setUserData(null, null, null, false));
                 // dispatch(setDataUserThunk())
             }
         })

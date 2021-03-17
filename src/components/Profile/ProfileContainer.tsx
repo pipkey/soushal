@@ -1,11 +1,11 @@
 import React from "react";
 import {Profile} from "./Profile";
 import {connect} from "react-redux";
-import {RootStateType} from "../../redux/store";
 import {RouteComponentProps, withRouter} from "react-router";
 import {getStatus, getUserProfile, updateStatus} from "../../redux/profile-reducer";
 import {withAuthRedirect} from "../../HOC/withAuthRedirect";
 import {compose} from "redux";
+import {AppRootStateType} from "../../redux/redux-store";
 
 
 //start types
@@ -20,6 +20,8 @@ type ProfileContainerType = {
 type mapPapType = {
     profile: ProfileType,
     status: string
+    authorizedUserId: any
+    isAuth: boolean
 }
 
 type OwnPropsType = mapPapType & ProfileContainerType
@@ -30,7 +32,7 @@ export type ProfileType = {
     lookingForAJob: boolean,
     lookingForAJobDescription: string,
     fullName: string,
-    userId: number,
+    userId: string,
     photos: PhotoProfileType
 }
 type ContactsType = {
@@ -56,7 +58,10 @@ class ProfileContainer extends React.Component<UserURLPropsType> {
     componentDidMount(): void {
         let userId = this.props.match.params.userId;
         if (!userId) {
-            userId = "13116"
+            userId = this.props.authorizedUserId;
+            if (!userId){
+                this.props.history.push("/login")
+            }
         }
         this.props.getUserProfile(userId);
         this.props.getStatus(userId)
@@ -74,9 +79,11 @@ class ProfileContainer extends React.Component<UserURLPropsType> {
     }
 }
 
-let mapStateToProps = (state: RootStateType): mapPapType => ({
+let mapStateToProps = (state: AppRootStateType): mapPapType => ({
     profile: state.profilePage.profile,
-    status: state.profilePage.status
+    status: state.profilePage.status,
+    authorizedUserId: state.auth.id,
+    isAuth: state.auth.isAuth
 });
 
 // let WithURLDataContainerComponent = withRouter(ProfileContainer);

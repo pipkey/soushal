@@ -23,7 +23,7 @@ let InitialState: ProfilePageType = {
     postsDate: [
         {id: 1, message: "Hi, how are you?", likeCounts: 35},
         {id: 2, message: "It's my first Post", likeCounts: 74},
-        {id: 3, message: "Жыве Беларусь", likeCounts: 3000000},
+        {id: 3, message: "beer?", likeCounts: 3000000},
         {id: 4, message: "go home", likeCounts: 22},
         {id: 5, message: "we live in your dream", likeCounts: 11}
     ],

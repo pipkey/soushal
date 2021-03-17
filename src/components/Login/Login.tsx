@@ -4,8 +4,9 @@ import {Input} from "../FormsControls/FormsConrollers";
 import {required} from "../../utills/validators/validators";
 import {connect} from "react-redux";
 import {LoginThunk, LogOutThunk} from "../../redux/auth-reducer";
-import {RootStateType} from "../../redux/store";
 import {Redirect} from "react-router";
+import style from "../../components/FormsControls/FormControllers.module.css"
+import {AppRootStateType} from "../../redux/redux-store";
 
 
 export type FormDataType = {
@@ -53,6 +54,11 @@ const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
                        name={"rememberMe"}
                 /> remember Me
             </div>
+
+            <div>
+                {props.error && <div className={style.formSummaryError}> { props.error } </div>}
+            </div>
+
             <div>
                 <button>Login</button>
             </div>
@@ -67,11 +73,11 @@ const Login = (props: loginPropsType) => {
     const onSubmit = (formData: FormDataType) => {
         props.LoginThunk(formData)
     };
-debugger;
+
     if (props.isAuth) {
         return <Redirect to={"/profile"}/>
     }
-debugger;
+
     return (
         <div>
             <h1> Login </h1>
@@ -81,7 +87,7 @@ debugger;
 };
 
 
-const mapStateToProps = (state: RootStateType):MapPropsType => ({isAuth: state.auth.isAuth});
+const mapStateToProps = (state: AppRootStateType):MapPropsType => ({isAuth: state.auth.isAuth});
 
 
 export default connect(mapStateToProps, {LoginThunk, LogOutThunk})(Login);
