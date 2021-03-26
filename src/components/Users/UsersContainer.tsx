@@ -10,6 +10,13 @@ import {
 import Users from "./Users";
 import preloader from "../../assets/images/grid.svg"
 import {AppRootStateType} from "../../redux/redux-store";
+import {
+    getPageSizeS,
+    getTotalUsersCountS,
+    getUsersS,
+    getCurrentPageS,
+    getIsFetchingS, getFollowInProgressS
+} from "../../redux/selectors/usersSelectors";
 
 //types
 export type UsersPropsType = {
@@ -62,14 +69,24 @@ class UsersContainer extends React.Component<UsersPropsType> {
     }
 }
 
+// const mapStateToProps = (state: AppRootStateType): MapStatPropsType => {
+//     return {
+//         users: state.usersPage.users,
+//         pageSize: state.usersPage.pageSize,
+//         totalUsersCount: state.usersPage.totalUsersCount,
+//         currentPage: state.usersPage.currentPage,
+//         isFetching: state.usersPage.isFetching,
+//         followInProgress: state.usersPage.followingInProgress
+//     }
+// };
 const mapStateToProps = (state: AppRootStateType): MapStatPropsType => {
     return {
-        users: state.usersPage.users,
-        pageSize: state.usersPage.pageSize,
-        totalUsersCount: state.usersPage.totalUsersCount,
-        currentPage: state.usersPage.currentPage,
-        isFetching: state.usersPage.isFetching,
-        followInProgress: state.usersPage.followingInProgress
+        users: getUsersS(state),
+        pageSize: getPageSizeS(state),
+        totalUsersCount: getTotalUsersCountS(state),
+        currentPage: getCurrentPageS(state),
+        isFetching: getIsFetchingS(state),
+        followInProgress: getFollowInProgressS(state)
     }
 };
 
