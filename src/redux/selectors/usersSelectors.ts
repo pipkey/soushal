@@ -5,7 +5,7 @@ export const getUsersS = (state: AppRootStateType) => {
     return state.usersPage.users
 };
 
-export const getUsersSuperSelector = createSelector( getUsersS ,(users)=>{
+export const getUsersSuperSelector = createSelector(getUsersS, (users) => {
     return users
 });
 

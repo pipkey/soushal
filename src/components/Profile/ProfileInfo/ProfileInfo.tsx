@@ -1,8 +1,8 @@
 import React from 'react';
 import ss from "./ProfileInfo.module.css"
 import {ProfileType} from "../ProfileContainer";
-import {ProfileStatus} from "./ProfileStatus";
 import {Preloader} from "../../Preloader/Preloader";
+import {ProfileStatusWithHooks} from "./ProfileStatusHOOKS";
 
 type ProfileinfoType ={
     profile: ProfileType
@@ -22,7 +22,7 @@ if(!props.profile){
             <div className={ss.deskTopBlock}>
                 <img src={props.profile.photos? props.profile.photos.large : ""} alt="photo"/>
 
-                <ProfileStatus
+                <ProfileStatusWithHooks
                     status={props.status}
                     updateStatus={props.updateStatus}
                 />
