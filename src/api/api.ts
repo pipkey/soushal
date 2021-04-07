@@ -1,6 +1,18 @@
 import axios from "axios";
 import {FormDataType} from "../components/Login/Login";
 
+export type APIResponseType<D = {}, T = ResultCodes> = {
+    data: D
+    message: string[]
+    resultCode: T
+}
+
+export enum ResultCodes {
+    Success = 0,
+    Error = 1
+}
+
+
 const instance = axios.create({
     withCredentials: true,
     baseURL: "https://social-network.samuraijs.com/api/1.0/",
@@ -42,8 +54,8 @@ export const headerAPI = {
     setDataUser() {
         return instance.get(`auth/me`)
     },
-    login(formData:FormDataType) {
-        debugger
+    login(formData: FormDataType) {
+
         return instance.post(`auth/login`, formData)
     },
     logOut() {

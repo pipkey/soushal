@@ -49,39 +49,32 @@ export const setUserData = (id: number | null, email: string | null, login: stri
 
 
 //thunk
-export const setDataUserThunk = () => (dispatch: Dispatch) => {
-    return headerAPI.setDataUser()
-        .then(response => {
-            if (response.data.resultCode === 0) {
-                let {id, email, login} = response.data.data;
-                dispatch(setUserData(id, email, login, true))
-            }
-        })
+export const setDataUserThunk = () => async (dispatch: Dispatch) => {
+    let response = await headerAPI.setDataUser();
 
+    if (response.data.resultCode === 0) {
+        let {id, email, login} = response.data.data;
+        dispatch(setUserData(id, email, login, true))
+    }
 };
-export const LoginThunk = (formData: FormDataType): ThunkType => (dispatch: ThunkDispatch<AppRootStateType, unknown, any>) => {
-    headerAPI.login(formData)
-        .then(res => {
-            if (res.data.resultCode === 0) {
-                dispatch(setDataUserThunk())
-            } else {
-                let message = res.data.messages.length > 0 ? res.data.messages[0] : "some error";
-                dispatch(stopSubmit("Login", {_error: message}));
-            }
-        })
-
+export const LoginThunk = (formData: FormDataType): ThunkType => async (dispatch: ThunkDispatch<AppRootStateType, unknown, any>) => {
+    let res = await headerAPI.login(formData)
+    if (res.data.resultCode === 0) {
+        dispatch(setDataUserThunk())
+    } else {
+        let message = res.data.messages.length > 0 ? res.data.messages[0] : "some error";
+        dispatch(stopSubmit("Login", {_error: message}));
+    }
 };
 
 
-export const LogOutThunk = () => (dispatch: Dispatch<any>) => {
-    headerAPI.logOut()
-        .then(response => {
-            if (response.data.resultCode === 0) {
-                dispatch(setUserData(null, null, null, false));
-                // dispatch(setDataUserThunk())
-            }
-        })
+export const LogOutThunk = () => async (dispatch: Dispatch<any>) => {
+    let response = await headerAPI.logOut();
 
+    if (response.data.resultCode === 0) {
+        dispatch(setUserData(null, null, null, false));
+        // dispatch(setDataUserThunk())
+    }
 };
 
 

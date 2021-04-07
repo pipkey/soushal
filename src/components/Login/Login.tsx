@@ -1,6 +1,6 @@
 import React from "react"
 import {Field, reduxForm, InjectedFormProps} from "redux-form";
-import {Input} from "../FormsControls/FormsConrollers";
+import {Input, CreateField} from "../FormsControls/FormsConrollers";
 import {required} from "../../utills/validators/validators";
 import {connect} from "react-redux";
 import {LoginThunk, LogOutThunk} from "../../redux/auth-reducer";
@@ -27,36 +27,17 @@ type MapPropsType = {
 
 
 
-const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
+const LoginForm: React.FC<InjectedFormProps<FormDataType>> = ({handleSubmit, error}) => {
 
     return (
-        <form onSubmit={props.handleSubmit}>
-            <div>
-                <Field
-                    placeholder={"Email"}
-                    component={Input}
-                    name={"email"}
-                    validate={[required]}
-                />
-            </div>
-            <div>
-                <Field
-                    placeholder={"Password"}
-                    type={"password"}
-                    component={Input}
-                    name={"password"}
-                    validate={[required]}
-                />
-            </div>
-            <div>
-                <Field component={Input}
-                       type={"checkbox"}
-                       name={"rememberMe"}
-                /> remember Me
-            </div>
+        <form onSubmit={handleSubmit}>
+               { CreateField("Email",Input,"email",[required], null)}
+               { CreateField("Password",Input,"password",[required], {type:"password"})}
+               { CreateField(null ,Input,"rememberMe",null, {type:"checkbox"}, "remember Me")}
+
 
             <div>
-                {props.error && <div className={style.formSummaryError}> { props.error } </div>}
+                {error && <div className={style.formSummaryError}> { error } </div>}
             </div>
 
             <div>

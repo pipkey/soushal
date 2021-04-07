@@ -1,5 +1,7 @@
 import {Dispatch} from "redux";
-import {usersAPI} from "../api/api";
+import {ResultCodes, usersAPI} from "../api/api";
+import {BaseThunkType} from "./redux-store";
+import {helperObj} from "../utills/Helper";
 
 
 // AC type bind
@@ -23,6 +25,7 @@ export type UsersActionTypes =
 
 
 //types
+type ThunkType = BaseThunkType<UsersActionTypes>
 export type InitialType = {
     users: Array<UsersType>
     pageSize: number,
@@ -64,23 +67,13 @@ const usersReducer = (state = InitialState, action: UsersActionTypes) => {
         case FOLLOW: {
             return {
                 ...state,
-                users: state.users.map(u => {
-                    if (u.id === action.userId) {
-                        return {...u, followed: true}
-                    }
-                    return u
-                })
+                users: helperObj(state.users,action.userId, "id", {followed: true})
             }
         }
         case UNFOLLOW: {
             return {
                 ...state,
-                users: state.users.map(u => {
-                    if (u.id === action.userId) {
-                        return {...u, followed: false}
-                    }
-                    return u
-                })
+                users: helperObj(state.users, action.userId, "id", {followed: false})
             }
         }
         case SET_USERS:
@@ -117,37 +110,37 @@ export const toogleIsFollowing = (followingInProgress: boolean, userId: number) 
 
 
 //Thunk
-export const getUsers = (pageSize: number, currentPage: number) => {
-    return (dispatch: Dispatch) => {
-        dispatch(toogleIsFetching(true));
-        usersAPI.getUsers(pageSize, currentPage)
-            .then(data => {
-                dispatch(toogleIsFetching(false));
-                dispatch(setUsers(data.items));
-                dispatch(setUserTotalCount(data.totalCount))
-            })
-    };
+export const getUsers = (pageSize: number, currentPage: number) => async (dispatch: Dispatch) => {
+    dispatch(toogleIsFetching(true));
+    let data = await usersAPI.getUsers(pageSize, currentPage);
+
+    dispatch(toogleIsFetching(false));
+    dispatch(setUsers(data.items));
+    dispatch(setUserTotalCount(data.totalCount))
 };
-export const unFollow = (userId: number) => (dispatch: Dispatch) => {
-        dispatch(toogleIsFollowing(true, userId))
-        usersAPI.UnFollowUsers(userId)
-            .then(response => {
-                    if (response.data.resultCode === 0) dispatch(unFollowSucsess(userId));
-                    dispatch(toogleIsFollowing(false, userId))
-                }
-            )
-    };
+
+const followUnfollowFlow = async (dispatch: Dispatch,
+                                  userId: number,
+                                  apiMethod: (userId: number) => Promise<any>,
+                                  actionCreator: (userId: number) => UsersActionTypes) => {
+
+    dispatch(toogleIsFollowing(true, userId));
+    let response = await apiMethod(userId);
+    if (response.resultCode === ResultCodes.Success) {
+        dispatch(actionCreator(userId));
+    }
+    dispatch(toogleIsFollowing(false, userId))
+};
+
+export const unFollow = (userId: number):ThunkType => async (dispatch: Dispatch) => {
+    await followUnfollowFlow(dispatch,userId,usersAPI.UnFollowUsers.bind(usersAPI),unFollowSucsess)
+};
+
+export const follow = (userId: number):ThunkType => async (dispatch: Dispatch) => {
+    await followUnfollowFlow(dispatch,userId,usersAPI.FollowUsers.bind(usersAPI),followSucsess)
+};
 
 
-export const follow = (userId: number) => (dispatch: Dispatch) => {
-        dispatch(toogleIsFollowing(true, userId));
-        usersAPI.FollowUsers(userId)
-            .then(response => {
-                    if (response.data.resultCode === 0) dispatch(followSucsess(userId));
-                    dispatch(toogleIsFollowing(false, userId))
-                }
-            )
-    };
 
 
 export default usersReducer;
