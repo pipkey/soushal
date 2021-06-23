@@ -22,7 +22,7 @@ import {
 export type UsersPropsType = {
     users: Array<UsersType>
     pageSize: number
-    totalUsersCount: number
+    totalItemsCount: number
     follow: (usersId: number) => void
     unFollow: (usersId: number) => void
     setCurrentPage: (num: number) => void
@@ -35,7 +35,7 @@ export type UsersPropsType = {
 type MapStatPropsType = {
     users: Array<UsersType>
     pageSize: number
-    totalUsersCount: number
+    totalItemsCount: number
     currentPage: number
     isFetching: boolean
     followInProgress: Array<any>
@@ -57,7 +57,7 @@ class UsersContainer extends React.Component<UsersPropsType> {
             {this.props.isFetching ? <img src={preloader} alt="load"/> : null}
             <Users
                 onPageChanger={this.onPageChanger}
-                totalUsersCount={this.props.totalUsersCount}
+                totalItemsCount={this.props.totalItemsCount}
                 pageSize={this.props.pageSize}
                 follow={this.props.follow}
                 unFollow={this.props.unFollow}
@@ -83,7 +83,7 @@ const mapStateToProps = (state: AppRootStateType): MapStatPropsType => {
     return {
         users: getUsersS(state),
         pageSize: getPageSizeS(state),
-        totalUsersCount: getTotalUsersCountS(state),
+        totalItemsCount: getTotalUsersCountS(state),
         currentPage: getCurrentPageS(state),
         isFetching: getIsFetchingS(state),
         followInProgress: getFollowInProgressS(state)
