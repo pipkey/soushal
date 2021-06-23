@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "010dc4aa6a89ec91c96574ad2efcc501",
+    "revision": "9c1dd2ebdd1137839fe0c03b67d5453e",
     "url": "/soushal/index.html"
   },
   {
@@ -8,11 +8,11 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/soushal/static/css/4.111549b8.chunk.css"
   },
   {
-    "revision": "36fcae85b0cc4ff64640",
+    "revision": "1de0d6f6801a43ac3e4f",
     "url": "/soushal/static/css/5.6bd4b574.chunk.css"
   },
   {
-    "revision": "0cfa864977812e83a982",
+    "revision": "bdb540a01a7b190764e2",
     "url": "/soushal/static/css/6.a65905bc.chunk.css"
   },
   {
@@ -20,7 +20,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/soushal/static/css/7.b8dff8ee.chunk.css"
   },
   {
-    "revision": "38eaa88acd3e03768cac",
+    "revision": "d94f0376ae736ee1d76d",
     "url": "/soushal/static/css/main.cc0796df.chunk.css"
   },
   {
@@ -28,36 +28,36 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/soushal/static/js/0.cdf5a841.chunk.js"
   },
   {
-    "revision": "a8049da57fc0e7738759",
-    "url": "/soushal/static/js/3.1e823e31.chunk.js"
+    "revision": "bb3324494c0aa41c80f2",
+    "url": "/soushal/static/js/3.2c605fa3.chunk.js"
   },
   {
     "revision": "9b318b6fb13190fe82c0677e9264b3c7",
-    "url": "/soushal/static/js/3.1e823e31.chunk.js.LICENSE.txt"
+    "url": "/soushal/static/js/3.2c605fa3.chunk.js.LICENSE.txt"
   },
   {
     "revision": "18acdb317ae887b585f2",
     "url": "/soushal/static/js/4.e3918886.chunk.js"
   },
   {
-    "revision": "36fcae85b0cc4ff64640",
-    "url": "/soushal/static/js/5.07289967.chunk.js"
+    "revision": "1de0d6f6801a43ac3e4f",
+    "url": "/soushal/static/js/5.8f879470.chunk.js"
   },
   {
-    "revision": "0cfa864977812e83a982",
-    "url": "/soushal/static/js/6.601253a6.chunk.js"
+    "revision": "bdb540a01a7b190764e2",
+    "url": "/soushal/static/js/6.93ebd291.chunk.js"
   },
   {
     "revision": "13ead136a3141a4e5714",
     "url": "/soushal/static/js/7.1d054a76.chunk.js"
   },
   {
-    "revision": "38eaa88acd3e03768cac",
-    "url": "/soushal/static/js/main.00153462.chunk.js"
+    "revision": "d94f0376ae736ee1d76d",
+    "url": "/soushal/static/js/main.7dea2670.chunk.js"
   },
   {
-    "revision": "bf10b535d4fe86f9806e",
-    "url": "/soushal/static/js/runtime-main.bbe2d44f.js"
+    "revision": "dc6c95e1baf61c763c89",
+    "url": "/soushal/static/js/runtime-main.bf9d87ae.js"
   },
   {
     "revision": "272baf8c6b8a656e65ae24e7013edcd2",
