@@ -3,8 +3,8 @@
     "static/js/0.cdf5a841.chunk.js": "/soushal/static/js/0.cdf5a841.chunk.js",
     "static/js/0.cdf5a841.chunk.js.map": "/soushal/static/js/0.cdf5a841.chunk.js.map",
     "main.css": "/soushal/static/css/main.cc0796df.chunk.css",
-    "main.js": "/soushal/static/js/main.5b25a45d.chunk.js",
-    "main.js.map": "/soushal/static/js/main.5b25a45d.chunk.js.map",
+    "main.js": "/soushal/static/js/main.00153462.chunk.js",
+    "main.js.map": "/soushal/static/js/main.00153462.chunk.js.map",
     "runtime-main.js": "/soushal/static/js/runtime-main.bbe2d44f.js",
     "runtime-main.js.map": "/soushal/static/js/runtime-main.bbe2d44f.js.map",
     "static/js/3.1e823e31.chunk.js": "/soushal/static/js/3.1e823e31.chunk.js",
@@ -22,7 +22,7 @@
     "static/js/7.1d054a76.chunk.js": "/soushal/static/js/7.1d054a76.chunk.js",
     "static/js/7.1d054a76.chunk.js.map": "/soushal/static/js/7.1d054a76.chunk.js.map",
     "index.html": "/soushal/index.html",
-    "precache-manifest.80a811ac1a0f258c83fc9e7fd103c1bc.js": "/soushal/precache-manifest.80a811ac1a0f258c83fc9e7fd103c1bc.js",
+    "precache-manifest.2ee33825700dd0c8c80319c975883a41.js": "/soushal/precache-manifest.2ee33825700dd0c8c80319c975883a41.js",
     "service-worker.js": "/soushal/service-worker.js",
     "static/css/4.111549b8.chunk.css.map": "/soushal/static/css/4.111549b8.chunk.css.map",
     "static/css/5.6bd4b574.chunk.css.map": "/soushal/static/css/5.6bd4b574.chunk.css.map",
@@ -37,6 +37,6 @@
     "static/js/runtime-main.bbe2d44f.js",
     "static/js/3.1e823e31.chunk.js",
     "static/css/main.cc0796df.chunk.css",
-    "static/js/main.5b25a45d.chunk.js"
+    "static/js/main.00153462.chunk.js"
   ]
 }

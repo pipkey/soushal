@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "02f78e125434f4e72f5207e746d6dd80",
+    "revision": "010dc4aa6a89ec91c96574ad2efcc501",
     "url": "/soushal/index.html"
   },
   {
@@ -20,7 +20,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/soushal/static/css/7.b8dff8ee.chunk.css"
   },
   {
-    "revision": "7fbd0b58a990a7aa3941",
+    "revision": "38eaa88acd3e03768cac",
     "url": "/soushal/static/css/main.cc0796df.chunk.css"
   },
   {
@@ -52,8 +52,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/soushal/static/js/7.1d054a76.chunk.js"
   },
   {
-    "revision": "7fbd0b58a990a7aa3941",
-    "url": "/soushal/static/js/main.5b25a45d.chunk.js"
+    "revision": "38eaa88acd3e03768cac",
+    "url": "/soushal/static/js/main.00153462.chunk.js"
   },
   {
     "revision": "bf10b535d4fe86f9806e",
